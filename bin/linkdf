@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=$HOME/dotfiles
+# create symlinks for dotfiles
 
 get_name(){
     if [ ${1: -1} = "/" ]; then
@@ -20,7 +20,7 @@ file_exists(){
 }
 
 make_link(){
-    dest=$DIR$1
+    dest=$1
     src=$2
     if [ -d $dest ]; then
         name=$(get_name $dest)
@@ -42,6 +42,15 @@ make_link(){
     fi
 }
 
-make_link /.tmux.conf ~/.tmux.conf
-make_link /.config/nvim/ ~/.config/
-make_link /bin/tat ~/.local/bin/tat
+
+DIR=$HOME/dotfiles
+
+# tmux
+make_link $DIR/tmux/.tmux.conf $HOME/tmux.conf
+
+# nvim
+make_link $DIR/nvim/ $HOME/.config/
+
+#bin
+make_link $DIR/bin/tde $HOME/.local/bin/tde
+make_link $DIR/bin/linkdf $HOME/.local/bin/linkdf
