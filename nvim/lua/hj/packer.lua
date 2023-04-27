@@ -26,24 +26,25 @@ return require('packer').startup(function(use)
           ts_update()
       end
   }
+
   use("nvim-treesitter/playground")
 
   -- Lightline
-    use {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-    }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
 
   -- Indent lines
   use "lukas-reineke/indent-blankline.nvim"
 
   -- Vim matchup
   use {
-	  'andymass/vim-matchup',
-	  setup = function()
-		  -- may set any options here
-		  vim.g.matchup_matchparen_offscreen = { method = "popup" }
-	  end
+	'andymass/vim-matchup',
+	setup = function()
+        -- may set any options here
+        vim.g.matchup_matchparen_offscreen = { method = "popup" }
+	end
   }
 
   -- Undotree
