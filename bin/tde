@@ -7,26 +7,33 @@ path_name="$(basename "$PWD" | tr . -)"
 session_name=${1-$path_name}
 
 not_in_tmux() {
-  [ -z "$TMUX" ]
+    [ -z "$TMUX" ]
 }
 
 session_exists() {
-  tmux has-session -t "=$session_name"
+    tmux has-session -t "=$session_name"
 }
 
 create_detached_session() {
-  (TMUX='' tmux new-session -Ad -s "$session_name")
+    (TMUX='' tmux new-session -Ad -s "$session_name")
 }
 
 create_if_needed_and_attach() {
-  if not_in_tmux; then
-    tmux new-session -As "$session_name"
-  else
-    if ! session_exists; then
-      create_detached_session
+    if not_in_tmux; then
+        if ! session_exists; then
+            tmux new-session -d -s $session_name
+            tmux rename-window -t "$session_name:0" 'main'
+            tmux splitw -h -p 30 -t "$session_name:0.0"
+            tmux send-keys -t "$session_name:0.0" 'vim .' Enter
+            tmux select-pane -t "$session_name:0.0"
+        fi 
+            tmux a -t $session_name
+    else
+        if ! session_exists; then
+            create_detached_session
+        fi
+        tmux switch-client -t "$session_name"
     fi
-    tmux switch-client -t "$session_name"
-  fi
 }
 
 create_if_needed_and_attach
