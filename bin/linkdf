@@ -46,7 +46,7 @@ make_link(){
 DIR=$HOME/dotfiles
 
 # tmux
-make_link $DIR/tmux/.tmux.conf $HOME/tmux.conf
+make_link $DIR/tmux/.tmux.conf $HOME/.tmux.conf
 
 # nvim
 make_link $DIR/nvim/ $HOME/.config/
