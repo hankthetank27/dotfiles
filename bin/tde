@@ -23,8 +23,8 @@ create_if_needed_and_attach() {
         if ! session_exists; then
             tmux new-session -d -s $session_name
             tmux rename-window -t "$session_name:0" 'main'
-            tmux splitw -h -p 30 -t "$session_name:0.0"
             tmux send-keys -t "$session_name:0.0" 'vim .' Enter
+            tmux splitw -h -p 30 -t "$session_name:0.0"
             tmux select-pane -t "$session_name:0.0"
         fi 
             tmux a -t $session_name
