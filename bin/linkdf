@@ -54,3 +54,4 @@ make_link $DIR/nvim/ $HOME/.config/
 #bin
 make_link $DIR/bin/tde $HOME/.local/bin/tde
 make_link $DIR/bin/linkdf $HOME/.local/bin/linkdf
+make_link $DIR/.inputrc $HOME/.inputrc

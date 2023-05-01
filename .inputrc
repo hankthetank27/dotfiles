@@ -1,0 +1,8 @@
+set editing-mode vi
+set keymap vi-command
+# Vim style history search
+"\C-k": history-search-backward
+"\C-j": history-search-forward
+
+set keymap vi-insert
+"jj": "\e"
