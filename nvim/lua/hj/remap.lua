@@ -26,3 +26,5 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>")
 vim.keymap.set("n", "<leader>pv",  vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "<Leader>rnrw", "<Plug>NetrwRefresh")
+
