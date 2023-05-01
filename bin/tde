@@ -15,21 +15,22 @@ session_exists() {
 }
 
 create_detached_session() {
-    (TMUX='' tmux new-session -Ad -s "$session_name")
+    tmux new-session -d -s $session_name
+    tmux rename-window -t "$session_name:0" 'main'
+    tmux send-keys -t "$session_name:0.0" 'vim .' Enter
+    tmux splitw -h -p 30 -t "$session_name:0.0"
+    tmux select-pane -t "$session_name:0.0"
 }
 
 create_if_needed_and_attach() {
     if not_in_tmux; then
         if ! session_exists; then
-            tmux new-session -d -s $session_name
-            tmux rename-window -t "$session_name:0" 'main'
-            tmux send-keys -t "$session_name:0.0" 'vim .' Enter
-            tmux splitw -h -p 30 -t "$session_name:0.0"
-            tmux select-pane -t "$session_name:0.0"
+            create_detached_session
         fi 
-            tmux a -t $session_name
+        tmux a -t $session_name
     else
         if ! session_exists; then
+            TMUX=''
             create_detached_session
         fi
         tmux switch-client -t "$session_name"
