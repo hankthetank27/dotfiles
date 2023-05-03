@@ -47,3 +47,6 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true
 })
+
+-- diagnostic hover window
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]

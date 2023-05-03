@@ -1,3 +1,4 @@
+-- bootstrap packer
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -87,9 +88,8 @@ return require('packer').startup(function(use)
         requires = "nvim-tree/nvim-web-devicons",
         config = function()
             require("trouble").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
+                use_diagnostic_signs = true,
+                icons = false
             }
         end
     }
