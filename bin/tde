@@ -19,7 +19,8 @@ create_detached_session() {
     tmux rename-window -t "$session_name:0" 'main'
     tmux send-keys -t "$session_name:0.0" "vim ." Enter
     tmux splitw -v -p 15 -t "$session_name:0.0"
-    tmux neww -n "server"
+    tmux splitw -h -t "$session_name:0.1"
+    tmux neww -n "scratch"
     tmux selectw -t "$session_name:main"
     tmux select-pane -t "$session_name:0.0"
 }
