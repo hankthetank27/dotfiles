@@ -48,6 +48,12 @@ return require('packer').startup(function(use)
     -- vim repeat
     use "tpope/vim-repeat"
 
+    -- commentary
+    use "tpope/vim-commentary"
+
+    -- fugitive
+    use "tpope/vim-fugitive"
+
     -- Indent lines
     use "lukas-reineke/indent-blankline.nvim"
 
@@ -62,9 +68,6 @@ return require('packer').startup(function(use)
 
     -- Undotree
     use "mbbill/undotree"
-
-    -- fugitive
-    use "tpope/vim-fugitive"
 
     -- Vim/Tmux navigator
     use "christoomey/vim-tmux-navigator"
