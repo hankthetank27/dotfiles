@@ -42,6 +42,9 @@ return require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
+    -- instant markdown
+    use 'instant-markdown/vim-instant-markdown'
+
     -- vim surround
     use "tpope/vim-surround"
 
