@@ -48,10 +48,14 @@ DIR=$HOME/dotfiles
 # tmux
 make_link $DIR/tmux/.tmux.conf $HOME/.tmux.conf
 
+# vim
+make_link $DIR/.vimrc $HOME/.vimrc
+
 # nvim
 make_link $DIR/nvim/ $HOME/.config/
 
 #bin
 make_link $DIR/bin/tde $HOME/.local/bin/tde
-make_link $DIR/bin/linkdf $HOME/.local/bin/linkdf
+
+#other
 make_link $DIR/.inputrc $HOME/.inputrc
