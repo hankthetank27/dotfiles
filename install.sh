@@ -42,20 +42,19 @@ make_link(){
     fi
 }
 
-
-DIR=$HOME/dotfiles
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # tmux
-make_link $DIR/tmux/.tmux.conf $HOME/.tmux.conf
+make_link $SCRIPT_DIR/tmux/.tmux.conf $HOME/.tmux.conf
 
 # vim
-make_link $DIR/.vimrc $HOME/.vimrc
+make_link $SCRIPT_DIR/.vimrc $HOME/.vimrc
 
 # nvim
-make_link $DIR/nvim/ $HOME/.config/
+make_link $SCRIPT_DIR/nvim/ $HOME/.config/
 
 #bin
-make_link $DIR/bin/tde $HOME/.local/bin/tde
+make_link $SCRIPT_DIR/bin/tde $HOME/.local/bin/tde
 
 #other
-make_link $DIR/.inputrc $HOME/.inputrc
+make_link $SCRIPT_DIR/.inputrc $HOME/.inputrc
