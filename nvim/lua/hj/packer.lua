@@ -42,6 +42,9 @@ return require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
+    -- numbered tabs
+    use 'mkitt/tabline.vim'
+
     -- instant markdown
     use 'instant-markdown/vim-instant-markdown'
 
