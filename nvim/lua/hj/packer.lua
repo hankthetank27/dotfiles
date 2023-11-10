@@ -75,17 +75,17 @@ return require('packer').startup(function(use)
     -- Vim/Tmux navigator
     use "christoomey/vim-tmux-navigator"
 
-    -- file tree
-    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-    use {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-        }
-    }
+    -- -- file tree
+    -- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    -- use {
+    --     "nvim-neo-tree/neo-tree.nvim",
+    --     branch = "v2.x",
+    --     requires = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    --         "MunifTanjim/nui.nvim",
+    --     }
+    -- }
 
     -- Trouble
     use {
