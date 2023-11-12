@@ -45,11 +45,14 @@ return require('lazy').setup({
     -- instant markdown
     'instant-markdown/vim-instant-markdown',
 
-    -- vim surround
+    -- surround
     'tpope/vim-surround',
 
-    -- vim repeat
+    -- repeat
     "tpope/vim-repeat",
+
+    -- sneak
+    'justinmk/vim-sneak',
 
     -- commentary
     "tpope/vim-commentary",
@@ -91,8 +94,8 @@ return require('lazy').setup({
     {"hrsh7th/cmp-buffer"},
     {"hrsh7th/cmp-path"},
     {"hrsh7th/cmp-nvim-lsp"},
-    {"saadparwaiz1/cmp_luasnip"},
     {"hrsh7th/cmp-nvim-lua"},
+    {"saadparwaiz1/cmp_luasnip"},
     {"L3MON4D3/LuaSnip"},
     {"rafamadriz/friendly-snippets"},
     {"ray-x/lsp_signature.nvim"},

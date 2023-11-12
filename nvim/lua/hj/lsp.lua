@@ -3,6 +3,8 @@ local lsp = require("lsp-zero")
 lsp.on_attach(function(client, bufnr)
     local opts = {buffer = bufnr, remap = false}
 
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
@@ -34,6 +36,16 @@ require('mason-lspconfig').setup({
             local lua_opts = lsp.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
+        tsserver = function ()
+            local ts_opts = {
+                settings = {
+                    completions = {
+                        completeFunctionCalls = true
+                    }
+                }
+            }
+            require('lspconfig').tsserver.setup(ts_opts)
+        end,
         rust_analyzer = function ()
             local rust_opts = {
                 settings = {
@@ -58,7 +70,9 @@ lsp.set_sign_icons({
 })
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
 })
 
 
@@ -77,9 +91,9 @@ cmp.setup({
     sources = {
         {name = 'path'},
         {name = 'nvim_lsp'},
-        {name = 'nvim_lua'},
-        {name = 'buffer', keyword_length = 3},
-        {name = 'luasnip', keyword_length = 2},
+        -- {name = 'nvim_lua'},
+        -- {name = 'buffer', keyword_length = 3},
+        -- {name = 'luasnip', keyword_length = 2},
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-k>'] = cmp.mapping.select_prev_item(),
@@ -89,7 +103,10 @@ cmp.setup({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    })
+    }),
+    experimental = {
+        ghost_text = true,
+    },
 })
 
 require "lsp_signature".setup({
@@ -97,4 +114,5 @@ require "lsp_signature".setup({
         border = "none"
     },
     doc_lines = 0,
+    toggle_key = '<C-h>',
 })
