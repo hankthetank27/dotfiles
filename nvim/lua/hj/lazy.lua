@@ -13,6 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 
 return require('lazy').setup({
+    -- considering...
+    -- 'andymass/vim-matchup'
+    --
+    --
+    --
     -- Telescope
     {
         "nvim-telescope/telescope.nvim",
@@ -63,7 +68,6 @@ return require('lazy').setup({
     -- Indent lines
     "lukas-reineke/indent-blankline.nvim",
 
-    -- Undotree
     "mbbill/undotree",
 
     -- Vim/Tmux navigator

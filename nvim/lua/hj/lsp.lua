@@ -21,6 +21,7 @@ lsp.on_attach(function(client, bufnr)
     client.server_capabilities.semanticTokensProvider = nil
 end)
 
+
 require("mason").setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
@@ -32,10 +33,12 @@ require('mason-lspconfig').setup({
     },
     handlers = {
         lsp.default_setup,
+
         lua_ls = function()
             local lua_opts = lsp.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
+
         tsserver = function ()
             local ts_opts = {
                 settings = {
@@ -46,6 +49,7 @@ require('mason-lspconfig').setup({
             }
             require('lspconfig').tsserver.setup(ts_opts)
         end,
+
         rust_analyzer = function ()
             local rust_opts = {
                 settings = {
@@ -54,11 +58,13 @@ require('mason-lspconfig').setup({
                             allFeatures = true,
                         },
                     }
-                }}
+                }
+            }
             require('lspconfig').rust_analyzer.setup(rust_opts)
         end,
     }
 })
+
 
 lsp.set_sign_icons({
     sign_icons = {
@@ -75,24 +81,21 @@ vim.diagnostic.config({
     update_in_insert = true,
 })
 
-
 local cmp = require('cmp')
 require('luasnip.loaders.from_vscode').lazy_load()
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 cmp.setup({
+    -- shows completion sources. optional if only using lsp, not buffer?
     formatting = lsp.cmp_format(),
-    -- window = {
-    --     documentation = cmp.config.window.bordered(),
-    -- },
-    preselect = 'item',
+    preselect = 'none',
     completion = {
         completeopt = 'menu,menuone,noinsert',
     },
     sources = {
         {name = 'path'},
         {name = 'nvim_lsp'},
-        -- {name = 'nvim_lua'},
         -- {name = 'buffer', keyword_length = 3},
+        -- {name = 'nvim_lua'},
         -- {name = 'luasnip', keyword_length = 2},
     },
     mapping = cmp.mapping.preset.insert({
@@ -107,6 +110,12 @@ cmp.setup({
     experimental = {
         ghost_text = true,
     },
+})
+
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  })
 })
 
 require "lsp_signature".setup({
