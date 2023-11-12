@@ -14,20 +14,20 @@ vim.opt.rtp:prepend(lazypath)
 
 return require('lazy').setup({
     -- considering...
-    -- 'andymass/vim-matchup'
+    -- 'andymass/vim-matchup',
+    -- 'godlygeek/tabular',
     --
     --
-    --
-    -- Telescope
+    -- telescope
     {
         "nvim-telescope/telescope.nvim",
         dependencies = { {"nvim-lua/plenary.nvim"} }
     },
 
-    -- Color scheme
+    -- color scheme
     "savq/melange-nvim",
 
-    -- Treesitter
+    -- treesitter
      {
         "nvim-treesitter/nvim-treesitter",
         build =  function()
@@ -36,9 +36,8 @@ return require('lazy').setup({
             ts_update()
         end
     },
-    "nvim-treesitter/playground",
 
-    -- Lightline
+    -- status line config
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -47,33 +46,31 @@ return require('lazy').setup({
     -- numbered tabs
     'mkitt/tabline.vim',
 
-    -- instant markdown
+    -- markdown files open in browswer
     'instant-markdown/vim-instant-markdown',
 
     -- surround
     'tpope/vim-surround',
 
-    -- repeat
+    -- allow plugins to use repeat
     "tpope/vim-repeat",
 
-    -- sneak
+    -- "f" to two char patterns
     'justinmk/vim-sneak',
 
-    -- commentary
+    -- auto comment commands
     "tpope/vim-commentary",
 
-    -- fugitive
+    -- git
     "tpope/vim-fugitive",
 
-    -- Indent lines
-    "lukas-reineke/indent-blankline.nvim",
-
+    -- undotree
     "mbbill/undotree",
 
-    -- Vim/Tmux navigator
+    -- vim/tmux navigator
     "christoomey/vim-tmux-navigator",
 
-    -- Trouble
+    -- trouble
     {
         "folke/trouble.nvim",
         dependencies = "nvim-tree/nvim-web-devicons",
@@ -85,15 +82,13 @@ return require('lazy').setup({
         end
     },
 
-    -- LSP
-    {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
-
     -- LSP support
+    {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
     {"neovim/nvim-lspconfig"},
     {"williamboman/mason.nvim"},
     {"williamboman/mason-lspconfig.nvim"},
 
-    -- Autocompletion
+    -- autocompletion
     {"hrsh7th/nvim-cmp"},
     {"hrsh7th/cmp-buffer"},
     {"hrsh7th/cmp-path"},
