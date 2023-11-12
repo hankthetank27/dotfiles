@@ -5,9 +5,13 @@
 
 path_name=$PWD
 
-if [ ! -z "$1" ] 
-    then
+if [ ! -z "$1" ]; then
+    if [ -d "$1" ]; then
         path_name=$(cd "$1" && pwd -P)
+    else
+        echo Invalid directory path: $1
+        exit 1
+    fi
 fi
 
 session_name="$(basename "$path_name" | tr . -)"
@@ -53,8 +57,5 @@ create_if_needed_and_attach() {
     fi
 }
 
-if [ -d $path_name ]; then
-    create_if_needed_and_attach
-else
-    echo directory does not exist: $path_name 
-fi
+create_if_needed_and_attach
+

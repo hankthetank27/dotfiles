@@ -54,7 +54,7 @@ make_link $SCRIPT_DIR/.vimrc $HOME/.vimrc
 make_link $SCRIPT_DIR/nvim/ $HOME/.config/
 
 #bin
-make_link $SCRIPT_DIR/bin/tde $HOME/.local/bin/tde
+make_link $SCRIPT_DIR/bin/tde.sh $HOME/.local/bin/tde
 
 #other
 make_link $SCRIPT_DIR/.inputrc $HOME/.inputrc
