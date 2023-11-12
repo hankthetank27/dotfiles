@@ -44,17 +44,14 @@ make_link(){
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-# tmux
-make_link $SCRIPT_DIR/tmux/.tmux.conf $HOME/.tmux.conf
+# editor
+make_link $SCRIPT_DIR/editor/nvim/ $HOME/.config/
+make_link $SCRIPT_DIR/editor/.vimrc $HOME/.vimrc
 
-# vim
-make_link $SCRIPT_DIR/.vimrc $HOME/.vimrc
-
-# nvim
-make_link $SCRIPT_DIR/nvim/ $HOME/.config/
+# shell
+make_link $SCRIPT_DIR/shell/.tmux.conf $HOME/.tmux.conf
+make_link $SCRIPT_DIR/shell/.bashrc $HOME/.bashrc
+make_link $SCRIPT_DIR/shell/.inputrc $HOME/.inputrc
 
 #bin
 make_link $SCRIPT_DIR/bin/tde.sh $HOME/.local/bin/tde
-
-#other
-make_link $SCRIPT_DIR/.inputrc $HOME/.inputrc
