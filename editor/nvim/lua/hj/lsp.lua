@@ -106,10 +106,11 @@ cmp.setup({
     },
 
     sources = {
-        {name = 'path'},
+        -- ordering sets priortiy!!
         {name = 'nvim_lsp'},
+        {name = 'path'},
 
-        -- optional below..
+        -- optional below...
         {name = 'buffer', keyword_length = 3},
         -- {name = 'luasnip', keyword_length = 2},
     },
@@ -129,11 +130,26 @@ cmp.setup({
     },
 })
 
--- path completions in commands
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  })
+-- completions in commands
+-- source path seems to be overriding normal tab command menu.
+-- could consider cmp-cmdline, or just not bother...
+-- cmp.setup.cmdline(':', {
+--     sources = cmp.config.sources({
+--         { name = 'path' },
+--     }),
+--     mapping = cmp.mapping.preset.cmdline()
+-- })
+
+-- completions in search
+cmp.setup.cmdline({'/', '?'}, {
+    sources = cmp.config.sources({
+        { name = 'buffer' },
+    }),
+    mapping = cmp.mapping.preset.cmdline({
+        -- not behaving as expected. inserts charater into command.
+        -- will have to be happy with normal mappings for now.
+        -- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    })
 })
 
 -- function signature hints
