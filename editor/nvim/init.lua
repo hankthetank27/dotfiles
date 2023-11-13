@@ -1,1 +1,1 @@
-require("hj")
+require("config")
