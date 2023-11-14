@@ -86,6 +86,8 @@ vim.diagnostic.config({
     signs = true,
     -- can be slightly annoying..
     update_in_insert = true,
+    severity_sort = true,
+
 })
 
 -- snippets etc
