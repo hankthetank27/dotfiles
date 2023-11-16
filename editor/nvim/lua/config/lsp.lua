@@ -165,6 +165,9 @@ local cmp_mappings = {
                 cmp.close()
             else
                 cmp.complete()
+                if #cmp.get_entries() == 1 then
+                    cmp.confirm({ select = false })
+                end
             end
         end
         , { 'c' })
