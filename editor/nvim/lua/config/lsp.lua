@@ -1,11 +1,12 @@
 local lsp = require("lsp-zero")
+local cmp = require('cmp')
 
 lsp.on_attach(function(client, bufnr)
     local opts = {buffer = bufnr, remap = false}
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- mappings
+    -- lsp mappings
     vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
@@ -22,7 +23,6 @@ lsp.on_attach(function(client, bufnr)
     -- disable semantic tokens
     client.server_capabilities.semanticTokensProvider = nil
 end)
-
 
 -- LSPs / LSP manager
 require("mason").setup()
@@ -92,21 +92,92 @@ vim.diagnostic.config({
 
 -- snippets etc
 -- require('luasnip.loaders.from_vscode').lazy_load()
-
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-local cmp = require('cmp')
-cmp.setup({
+local cmp_mappings = {
+    ['<C-k>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end
+        , { 'i', 'c' }),
+    ['<C-j>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end
+        , { 'i', 'c' }),
+    ['<C-e>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.abort()
+            else
+                fallback()
+            end
+        end
+        , { 'i', 'c' }),
+    ['<C-b>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(-4)
+            else
+                fallback()
+            end
+        end
+        , { 'i' }),
+    ['<C-f>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.scroll_docs(4)
+            else
+                fallback()
+            end
+        end
+        , { 'i' }),
+    ['<CR>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.confirm({ select = true})
+            else
+                fallback()
+            end
+        end
+        , { 'i' }),
+    ['<C-y>'] = cmp.mapping(
+        function (fallback)
+            if cmp.visible() then
+                cmp.confirm({ select = true})
+            else
+                fallback()
+            end
+        end
+        , { 'i','c' }),
+    -- toggle cmp menu in command mode
+    ['<Tab>'] = cmp.mapping(
+        function ()
+            if cmp.visible() then
+                cmp.close()
+            else
+                cmp.complete()
+            end
+        end
+        , { 'c' })
+}
 
+cmp.setup({
     -- shows completion sources in menu
     formatting = lsp.cmp_format(),
-
     -- select first completion option regardless of LSP preselect item
     preselect = 'none',
     completion = {
         completeopt = 'menu,menuone,noinsert',
     },
-
     sources = {
         -- ordering sets priortiy!!
         {name = 'nvim_lsp'},
@@ -116,43 +187,32 @@ cmp.setup({
         {name = 'buffer', keyword_length = 3},
         -- {name = 'luasnip', keyword_length = 2},
     },
-
-    mapping = cmp.mapping.preset.insert({
-        ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<C-j>'] = cmp.mapping.select_next_item(),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    }),
-
+    mapping = cmp_mappings,
     experimental = {
         ghost_text = true,
     },
 })
 
--- completions in commands
--- source path seems to be overriding normal tab command menu.
--- could consider cmp-cmdline, or just not bother...
--- cmp.setup.cmdline(':', {
---     sources = cmp.config.sources({
---         { name = 'path' },
---     }),
---     mapping = cmp.mapping.preset.cmdline()
--- })
+cmp.setup.cmdline(':', {
+    mapping = cmp_mappings,
+    -- only display menu when toggled on
+    completion = {
+        autocomplete = false,
+    },
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    }),
+})
 
--- completions in search
-cmp.setup.cmdline({'/', '?'}, {
+cmp.setup.cmdline('/', {
+    mapping = cmp_mappings,
     sources = cmp.config.sources({
         { name = 'buffer' },
     }),
-    mapping = cmp.mapping.preset.cmdline({
-        -- not behaving as expected. inserts charater into command.
-        -- will have to be happy with normal mappings for now.
-        -- ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    })
 })
+
 
 -- function signature hints
 require "lsp_signature".setup({
