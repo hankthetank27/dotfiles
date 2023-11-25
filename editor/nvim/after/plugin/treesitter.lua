@@ -5,6 +5,7 @@ require'nvim-treesitter.configs'.setup {
         "typescript",
         "rust",
         "python",
+        "go",
         "scheme",
         "c",
         "lua",

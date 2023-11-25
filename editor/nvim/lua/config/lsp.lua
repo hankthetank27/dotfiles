@@ -1,4 +1,4 @@
-local lsp = require("lsp-zero")
+local lsp = require('lsp-zero')
 local cmp = require('cmp')
 
 lsp.on_attach(function(client, bufnr)
@@ -71,13 +71,12 @@ require('mason-lspconfig').setup({
     }
 })
 
-
 lsp.set_sign_icons({
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
+        error  = 'E',
+        warn   = 'W',
+        hint   = 'H',
+        info   = 'I'
     }
 })
 
@@ -159,6 +158,7 @@ local cmp_mappings = {
         end
         , { 'i','c' }),
     -- toggle cmp menu in command mode
+    -- autocompletes to first option if only one exists
     ['<Tab>'] = cmp.mapping(
         function ()
             if cmp.visible() then

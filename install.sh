@@ -52,6 +52,7 @@ make_link $SCRIPT_DIR/editor/.vimrc $HOME/.vimrc
 make_link $SCRIPT_DIR/shell/.tmux.conf $HOME/.tmux.conf
 make_link $SCRIPT_DIR/shell/.bashrc $HOME/.bashrc
 make_link $SCRIPT_DIR/shell/.inputrc $HOME/.inputrc
+make_link $SCRIPT_DIR/shell/.bash_aliases $HOME/.bash_aliases
 
 #bin
 make_link $SCRIPT_DIR/bin/tde.sh $HOME/.local/bin/tde
