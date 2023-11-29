@@ -1,4 +1,6 @@
-local lsp = require('lsp-zero')
+local lsp = require('lsp-zero').preset({
+    float_border = 'none',
+})
 local cmp = require('cmp')
 
 lsp.on_attach(function(client, bufnr)
@@ -15,7 +17,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>ee", function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
@@ -33,6 +35,7 @@ require('mason-lspconfig').setup({
         'tsserver',
         'rust_analyzer',
         'gopls',
+        'theme_check',
     },
     handlers = {
         lsp.default_setup,
@@ -67,6 +70,11 @@ require('mason-lspconfig').setup({
                 }
             }
             require('lspconfig').rust_analyzer.setup(rust_opts)
+        end,
+
+        -- shopify liquid
+        theme_check = function ()
+           require('lspconfig').theme_check.setup{}
         end,
     }
 })
