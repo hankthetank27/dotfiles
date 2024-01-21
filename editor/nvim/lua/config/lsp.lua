@@ -3,7 +3,9 @@ local lsp = require('lsp-zero').preset({
 })
 local cmp = require('cmp')
 
+
 lsp.on_attach(function(client, bufnr)
+
     local opts = {buffer = bufnr, remap = false}
 
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -26,10 +28,11 @@ lsp.on_attach(function(client, bufnr)
     client.server_capabilities.semanticTokensProvider = nil
 end)
 
+
 -- LSPs / LSP manager
 require("mason").setup()
 require('mason-lspconfig').setup({
-  ensure_installed = {
+    ensure_installed = {
         'lua_ls',
         'html',
         'tsserver',
@@ -74,7 +77,7 @@ require('mason-lspconfig').setup({
 
         -- shopify liquid
         theme_check = function ()
-           require('lspconfig').theme_check.setup{}
+            require('lspconfig').theme_check.setup{}
         end,
     }
 })
@@ -213,8 +216,8 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
-        { name = 'cmdline' }
-    }),
+            { name = 'cmdline' }
+        }),
 })
 
 cmp.setup.cmdline('/', {

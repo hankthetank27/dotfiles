@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.keymap.set("i", "jj", "<Esc>")
 
+-- quick save
+vim.keymap.set("n", "<leader>w", ":w<CR>")
+
 -- moves highlighted text
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -23,8 +26,9 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- etc
-vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>")
+-- vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>")
 vim.keymap.set("n", "<leader>pv",  vim.cmd.Ex)
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<Leader>rnrw", "<Plug>NetrwRefresh")
 
+-- search for all instances currently selected text in buffer
+vim.keymap.set("v", "<leader>ls", 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>')
