@@ -102,7 +102,10 @@ fi
 bind 'set bell-style none'
 
 # gui
-export DISPLAY=$(ip route | awk '{print $3; exit}'):0
+if command -v ip &> /dev/null
+then
+    export DISPLAY=$(ip route | awk '{print $3; exit}'):0
+fi
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -110,6 +113,11 @@ export DISPLAY=$(ip route | awk '{print $3; exit}'):0
 export PATH="/home/henrye/.deno/bin:$PATH"
 
 [ -f "/home/henrye/.ghcup/env" ] && source "/home/henrye/.ghcup/env" # ghcup-env
-. "$HOME/.cargo/env"
-eval "$(~/.rbenv/bin/rbenv init - bash)"
-eval "$(~/.rbenv/bin/rbenv init - bash)"
+
+if [ -f $HOME/.cargo/env ]; then
+    . "$HOME/.cargo/env"
+fi
+
+if [ -f ~/.rbenv/bin/rbenv ]; then
+    eval "$(~/.rbenv/bin/rbenv init - bash)"
+fi
