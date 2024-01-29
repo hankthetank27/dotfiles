@@ -47,6 +47,8 @@ return require('lazy').setup({
         end
     },
 
+    "nvim-treesitter/playground",
+
     -- status line config
     {
         "nvim-lualine/lualine.nvim",
