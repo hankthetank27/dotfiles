@@ -57,18 +57,3 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 
-
--- vim.treesitter.language.register('html', 'liquid')
-
--- vim.treesitter.query.set("html", "injections", [[
--- ([
---     ((attribute_value) @att (#match? @att ".*(}}|}\\%).*"))
---     (text) @text
--- ] @injection.content)(#set! injection.language "liquid")
--- ]])
--- vim.treesitter.query.set("liquid", "injections", "(program) @html")
-
--- vim.treesitter.query.set("html", "injections", [[
---     ((text) (ERROR) @injection.content (#set! injection.language "liquid"))
--- ]])
-
