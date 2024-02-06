@@ -14,10 +14,11 @@ vim.opt.rtp:prepend(lazypath)
 
 return require('lazy').setup({
     -- considering...
+    --
     -- 'andymass/vim-matchup',
     -- 'godlygeek/tabular',
-    --
-    --
+    -- {"sindrets/diffview.nvim", lazy = true},
+
     -- telescope
     {
         "nvim-telescope/telescope.nvim",
@@ -46,7 +47,6 @@ return require('lazy').setup({
             ts_update()
         end
     },
-
     "nvim-treesitter/playground",
 
     -- status line config
@@ -75,6 +75,8 @@ return require('lazy').setup({
 
     -- git
     "tpope/vim-fugitive",
+
+    -- visual diffing
 
     -- undotree
     "mbbill/undotree",

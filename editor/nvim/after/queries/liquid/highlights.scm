@@ -1,4 +1,4 @@
-[
+([
  "{{"
  "}}"
  "{{-"
@@ -7,39 +7,67 @@
  "%}"
  "{%-"
  "-%}"
-] @tag.delimiter
+] @tag.delimiter (#set! priority 101))
 
-[
+([
  "]"
  "["
-] @punctuation.bracket
+ ")"
+ "("
+] @punctuation.bracket (#set! priority 101))
 
-[
- "|"
- "."
- ":"
+([
  ","
+ "."
+] @punctuation.delimiter (#set! priority 101))
+
+([
+ "|"
+ ":"
+ "="
  (predicate)
-] @operator
+] @operator (#set! priority 101))
 
-[
+([
+ "as"
+ "with"
+ "liquid"
+
+ ;; throwing?
+ ; "break"
+ ; "continue"
+
+ "case"
+ "when"
+ "endcase"
+
+ "for"
+ "endfor"
+
+ "capture"
+ "endcapture"
+
+ "if"
+ "else"
+ "elsif"
+ "endif"
+ 
+ "unless"
+ "endunless"
+
+ "schema"
+ "endschema"
+
  (statement)
- (unless_tag)
- (if_tag)
- (elseif_tag)
- (else_tag)
- (for_loop_tag)
- ; "with"
- ; "for"
- ; "as"
-] @keyword
+] @keyword (#set! priority 101))
 
-(identifier) @variable
-(string) @string
-(boolean) @boolean
-(number) @number
+((identifier) @variable (#set! priority 101))
+((string) @string (#set! priority 101))
+((boolean) @boolean (#set! priority 101))
+((number) @number (#set! priority 101))
+((nil) @constant.builtin (#set! priority 101))
 
 (filter
-  name: (identifier) @function.call)
+  name: (identifier) @function.call (#set! priority 101))
 
-(comment) @comment
+((comment) @comment (#set! priority 102))
