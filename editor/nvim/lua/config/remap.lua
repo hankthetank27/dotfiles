@@ -32,3 +32,10 @@ vim.keymap.set("n", "Q", "<nop>")
 
 -- search for all instances currently selected text in buffer
 vim.keymap.set("v", "<leader>ls", 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>')
+
+-- set tab nav to numbers
+for i = 1, 9 do
+    vim.keymap.set("n", string.format("<leader>%d", i), string.format("%dgt", i))
+end
+vim.keymap.set("n", "<leader>0", ":tablast<cr>")
+
