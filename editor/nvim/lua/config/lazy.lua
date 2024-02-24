@@ -13,105 +13,108 @@ vim.opt.rtp:prepend(lazypath)
 
 
 return require('lazy').setup({
-    -- considering...
-    --
-    -- 'andymass/vim-matchup',
-    -- 'godlygeek/tabular',
-    -- {"sindrets/diffview.nvim", lazy = true},
+  -- considering...
+  --
+  -- 'andymass/vim-matchup',
+  -- 'godlygeek/tabular',
+  -- {"sindrets/diffview.nvim", lazy = true},
 
-    -- telescope
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { {"nvim-lua/plenary.nvim"} }
-    },
+  -- telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { {"nvim-lua/plenary.nvim"} }
+  },
 
-    -- rust
-    {
-        "rust-lang/rust.vim",
-        event = "VeryLazy",
-        ft = "rust",
-        init = function()
-            vim.g.rustfmt_autosave = 1
-        end,
-    },
+  -- rust
+  {
+    "rust-lang/rust.vim",
+    event = "VeryLazy",
+    ft = "rust",
+    init = function()
+      vim.g.rustfmt_autosave = 1
+    end,
+  },
 
-    -- color scheme
-    "savq/melange-nvim",
+  -- color scheme
+  "savq/melange-nvim",
 
-    -- treesitter
-     {
-        "nvim-treesitter/nvim-treesitter",
-        build =  function()
-            local ts_update = require('nvim-treesitter.install')
-            .update({ with_sync = true })
-            ts_update()
-        end
-    },
-    "nvim-treesitter/playground",
+  -- treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build =  function()
+      local ts_update = require('nvim-treesitter.install')
+      .update({ with_sync = true })
+      ts_update()
+    end
+  },
+  "nvim-treesitter/playground",
 
-    -- status line config
-    {
-        "nvim-lualine/lualine.nvim",
-        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
-    },
+  -- status line config
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+  },
 
-    -- numbered tabs
-    'mkitt/tabline.vim',
+  -- numbered tabs
+  'mkitt/tabline.vim',
 
-    -- markdown files open in browswer
-    'instant-markdown/vim-instant-markdown',
+  -- markdown files open in browswer
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+  },
 
-    -- surround
-    'tpope/vim-surround',
+  -- surround
+  'tpope/vim-surround',
 
-    -- allow plugins to use repeat
-    "tpope/vim-repeat",
+  -- allow plugins to use repeat
+  "tpope/vim-repeat",
 
-    -- "f" to two char patterns
-    'justinmk/vim-sneak',
+  -- "f" to two char patterns
+  'justinmk/vim-sneak',
 
-    -- auto comment commands
-    "tpope/vim-commentary",
+  -- auto comment commands
+  "tpope/vim-commentary",
 
-    -- git
-    "tpope/vim-fugitive",
+  -- git
+  "tpope/vim-fugitive",
 
-    -- visual diffing
+  -- undotree
+  "mbbill/undotree",
 
-    -- undotree
-    "mbbill/undotree",
+  -- vim/tmux navigator
+  "christoomey/vim-tmux-navigator",
 
-    -- vim/tmux navigator
-    "christoomey/vim-tmux-navigator",
+  -- trouble
+  {
+    "folke/trouble.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        use_diagnostic_signs = true,
+        icons = false
+      }
+    end
+  },
 
-    -- trouble
-    {
-        "folke/trouble.nvim",
-        dependencies = "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("trouble").setup {
-                use_diagnostic_signs = true,
-                icons = false
-            }
-        end
-    },
+  -- LSP support
+  {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
+  {"neovim/nvim-lspconfig"},
+  {"williamboman/mason.nvim"},
+  {"williamboman/mason-lspconfig.nvim"},
 
-    -- LSP support
-    {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
-    {"neovim/nvim-lspconfig"},
-    {"williamboman/mason.nvim"},
-    {"williamboman/mason-lspconfig.nvim"},
-
-    -- autocompletion
-    {"hrsh7th/nvim-cmp"},
-    {"hrsh7th/cmp-buffer"},
-    {"hrsh7th/cmp-path"},
-    {"hrsh7th/cmp-nvim-lsp"},
-    {"hrsh7th/cmp-nvim-lua"},
-    {"hrsh7th/cmp-cmdline"},
-    {"saadparwaiz1/cmp_luasnip"},
-    {"L3MON4D3/LuaSnip"},
-    {"rafamadriz/friendly-snippets"},
-    {"ray-x/lsp_signature.nvim"},
+  -- autocompletion
+  {"hrsh7th/nvim-cmp"},
+  {"hrsh7th/cmp-buffer"},
+  {"hrsh7th/cmp-path"},
+  {"hrsh7th/cmp-nvim-lsp"},
+  {"hrsh7th/cmp-nvim-lua"},
+  {"hrsh7th/cmp-cmdline"},
+  {"saadparwaiz1/cmp_luasnip"},
+  {"L3MON4D3/LuaSnip"},
+  {"rafamadriz/friendly-snippets"},
+  {"ray-x/lsp_signature.nvim"},
 
 });
