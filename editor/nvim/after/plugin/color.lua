@@ -11,7 +11,6 @@ vim.api.nvim_command([[
 ]])
 vim.cmd [[silent! colorscheme melange]]
 
-
 -- display highlight group under cursor
 vim.keymap.set("n", "<Leader>hg",
     function()
@@ -26,6 +25,8 @@ vim.api.nvim_set_hl(0, "Include", { link = "Statement" })
 vim.api.nvim_set_hl(0, "PreCondit", { link = "Statement" })
 vim.api.nvim_set_hl(0, "PreProc", { link = "Statement" })
 vim.api.nvim_set_hl(0, "@function.macro", { link = "Macro"})
+vim.api.nvim_set_hl(0, "@constant", { link = "Constant"})
+vim.api.nvim_set_hl(0, "@module", { link = "Type"})
 
 vim.api.nvim_set_hl(0, "Macro", { fg = "#cc5f5f" })
 
