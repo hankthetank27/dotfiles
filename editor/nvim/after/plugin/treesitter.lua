@@ -2,18 +2,39 @@ local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 
 parser_config.liquid = {
     install_info = {
-        url = "~/programming_projects/tree-sitter-liquid/", -- local path or git repo
+        url = "~/programming_projects/tree-sitter-liquid/",
         files = {
             "src/parser.c",
             "src/scanner.c",
         },
-        -- optional entries:
-        branch = "main", -- default branch in case of git repo if different from master
-        generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-        requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
+        branch = "main",
+        generate_requires_npm = false,
+        requires_generate_from_grammar = true,
     },
-    filetype = "liquid", -- if filetype does not match the parser name
+    filetype = "liquid",
 }
+
+local query = require "vim.treesitter.query"
+query.add_predicate("is-file-extension?", function (_match, _pattern, bufnr, pred)
+    if not pred[1] or not pred[2] then
+        return
+    end
+
+    local filename = vim.api.nvim_buf_get_name(bufnr):match("^.+/(.+)$")
+
+    if not filename then
+        return
+    end
+
+    local extension_index = filename:find("%.")
+
+    if not extension_index then
+        return
+    end
+
+    local extension = filename:sub(extension_index)
+    return pred[2] == extension
+end, true)
 
 
 require'nvim-treesitter.configs'.setup {
@@ -33,10 +54,8 @@ require'nvim-treesitter.configs'.setup {
         "html",
         "css",
         "vimdoc",
-        "query",
         "sql",
         'markdown',
-        'markdown_inline',
         'liquid',
     },
 

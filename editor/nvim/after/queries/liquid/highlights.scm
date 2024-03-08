@@ -25,21 +25,16 @@
   ] @punctuation.delimiter 
  (#set! priority 101))
 
-([
-  "|"
-  ":"
-  "="
-  (predicate)
-  ] @operator 
- (#set! priority 101))
 
 ([
+  "and"
   "as"
   "assign"
   "break"
   "by"
   "capture"
   "case"
+  "contains"
   "continue"
   "cycle"
   "decrement"
@@ -67,6 +62,7 @@
   "javascript"
   "layout"
   "liquid"
+  "or"
   "paginate"
   "raw"
   "render"
@@ -79,6 +75,14 @@
   "when"
   "with"
   ] @keyword 
+ (#set! priority 101))
+
+([
+  "|"
+  ":"
+  "="
+  (predicate)
+  ] @operator 
  (#set! priority 101))
 
 ((identifier) @variable (#set! priority 101))

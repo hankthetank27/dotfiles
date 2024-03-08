@@ -1,5 +1,5 @@
-inoremap jj <ESC>
 let g:mapleader = " "
+inoremap jj <ESC>
 
 " Center search terms with 'n' and 'N'
 nnoremap n nzzzv
