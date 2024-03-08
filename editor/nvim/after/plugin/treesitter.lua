@@ -1,4 +1,5 @@
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+local query = require "vim.treesitter.query"
 
 parser_config.liquid = {
     install_info = {
@@ -14,26 +15,46 @@ parser_config.liquid = {
     filetype = "liquid",
 }
 
-local query = require "vim.treesitter.query"
-query.add_predicate("is-file-extension?", function (_match, _pattern, bufnr, pred)
-    if not pred[1] or not pred[2] then
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/57205313dda0ac82ac69e21d5e2a80f3297c14cc/lua/nvim-treesitter/query_predicates.lua#L27
+local function valid_args(name, pred, count, strict_count)
+  local arg_count = #pred - 1
+
+  if strict_count then
+    if arg_count ~= count then
+      error(string.format("%s must have exactly %d arguments", name, count))
+      return false
+    end
+  elseif arg_count < count then
+    error(string.format("%s must have at least %d arguments", name, count))
+    return false
+  end
+
+  return true
+end
+
+-- custom query predicate for allowing injections based on file extension
+
+---@param _match (TSNode|nil)[]
+---@param _pattern string
+---@param bufnr integer
+---@param pred string[]
+---@return boolean|nil
+query.add_predicate("buf-has-file-extension?", function (_match, _pattern, bufnr, pred)
+    if not valid_args("buf-has-file-extension?", pred, 1, true) then
         return
     end
 
     local filename = vim.api.nvim_buf_get_name(bufnr):match("^.+/(.+)$")
-
     if not filename then
         return
     end
 
     local extension_index = filename:find("%.")
-
     if not extension_index then
         return
     end
 
-    local extension = filename:sub(extension_index)
-    return pred[2] == extension
+    return pred[2] == filename:sub(extension_index + 1)
 end, true)
 
 
