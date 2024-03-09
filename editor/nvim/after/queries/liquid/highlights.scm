@@ -27,14 +27,12 @@
 
 
 ([
-  "and"
   "as"
   "assign"
   "break"
   "by"
   "capture"
   "case"
-  "contains"
   "continue"
   "cycle"
   "decrement"
@@ -56,13 +54,11 @@
   "for"
   "form"
   "if"
-  "in"
   "include"
   "increment"
   "javascript"
   "layout"
   "liquid"
-  "or"
   "paginate"
   "raw"
   "render"
@@ -75,6 +71,14 @@
   "when"
   "with"
   ] @keyword 
+ (#set! priority 101))
+
+([
+  "and"
+  "contains"
+  "in"
+  "or"
+  ] @keyword.operator
  (#set! priority 101))
 
 ([

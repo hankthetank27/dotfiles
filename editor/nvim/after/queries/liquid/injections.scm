@@ -1,21 +1,8 @@
 ((template_content) @injection.content
- (#buf-has-file-extension? "liquid")
- (#set! injection.language "html")
- (#set! injection.combined))
-
-((template_content) @injection.content
- (#buf-has-file-extension? "js.liquid")
- (#set! injection.language "javascript")
- (#set! injection.combined))
-
-((template_content) @injection.content
- (#buf-has-file-extension? "css.liquid")
- (#set! injection.language "css")
- (#set! injection.combined))
-
-((template_content) @injection.content
- (#buf-has-file-extension? "scss.liquid")
- (#set! injection.language "css")
+ (#set-lang-by-filetype! "liquid" "html")
+ (#set-lang-by-filetype! "js.liquid" "javascript")
+ (#set-lang-by-filetype! "css.liquid" "css")
+ (#set-lang-by-filetype! "scss.liquid" "scss")
  (#set! injection.combined))
 
 ((schema_statement

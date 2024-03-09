@@ -1,5 +1,4 @@
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-local query = require "vim.treesitter.query"
 
 parser_config.liquid = {
     install_info = {
@@ -33,28 +32,20 @@ local function valid_args(name, pred, count, strict_count)
 end
 
 -- custom query predicate for allowing injections based on file extension
+local query = require "vim.treesitter.query"
 
----@param _match (TSNode|nil)[]
----@param _pattern string
----@param bufnr integer
----@param pred string[]
----@return boolean|nil
-query.add_predicate("buf-has-file-extension?", function (_match, _pattern, bufnr, pred)
-    if not valid_args("buf-has-file-extension?", pred, 1, true) then
+query.add_directive("set-lang-by-filetype!", function (_, _, bufnr, pred, metadata)
+    if not valid_args("set-lang-by-filetype!", pred, 2, true) then
         return
     end
-
-    local filename = vim.api.nvim_buf_get_name(bufnr):match("^.+/(.+)$")
-    if not filename then
-        return
-    end
-
+    local filename = vim.fn.expand("#"..bufnr..":t")
     local extension_index = filename:find("%.")
     if not extension_index then
         return
     end
-
-    return pred[2] == filename:sub(extension_index + 1)
+    if pred[2] == filename:sub(extension_index + 1) then
+        metadata["injection.language"] = pred[3]
+    end
 end, true)
 
 
