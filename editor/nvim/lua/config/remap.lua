@@ -27,7 +27,9 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- etc
 -- vim.keymap.set("n", "<leader>nt", ":Neotree toggle<CR>")
-vim.keymap.set("n", "<leader>pv",  vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv",  vim.cmd.Ex)
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "<Leader>-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "Q", "<nop>")
 
 -- search for all instances currently selected text in buffer

@@ -27,9 +27,13 @@ vim.api.nvim_set_hl(0, "PreProc", { link = "Statement" })
 vim.api.nvim_set_hl(0, "@function.macro", { link = "Macro"})
 vim.api.nvim_set_hl(0, "@constant", { link = "Constant"})
 vim.api.nvim_set_hl(0, "@module", { link = "Type"})
-
 vim.api.nvim_set_hl(0, "Macro", { fg = "#cc5f5f" })
 
+-- highlight line number under cursor
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#d1cc87', bold = true })
+vim.o.cursorline = true
+vim.o.number = true
+vim.o.cursorlineopt = 'number'
 -- alt colorscheme. WIP
 --
 -- vim.api.nvim_set_hl(0, "String", { fg = "#85b695", italic = true})

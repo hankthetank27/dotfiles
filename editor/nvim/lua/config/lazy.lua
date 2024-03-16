@@ -1,129 +1,131 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
 
 return require('lazy').setup({
-  -- considering...
-  --
-  -- 'andymass/vim-matchup',
-  -- {"sindrets/diffview.nvim", lazy = true},
+    -- considering...
+    --
+    -- 'andymass/vim-matchup',
+    -- {"sindrets/diffview.nvim", lazy = true},
 
-  -- telescope
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { {"nvim-lua/plenary.nvim"} }
-  },
+    -- telescope
+    {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { {"nvim-lua/plenary.nvim"} }
+    },
 
-  -- rust
-  {
-    "rust-lang/rust.vim",
-    event = "VeryLazy",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
-  },
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
 
-  -- color scheme
-  "savq/melange-nvim",
+    -- rust
+    {
+        "rust-lang/rust.vim",
+        event = "VeryLazy",
+        ft = "rust",
+        init = function()
+            vim.g.rustfmt_autosave = 1
+        end,
+    },
 
-  -- treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build =  function()
-      local ts_update = require('nvim-treesitter.install')
-      .update({ with_sync = true })
-      ts_update()
-    end
-  },
-  "nvim-treesitter/playground",
+    -- color scheme
+    "savq/melange-nvim",
 
-  -- status line config
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
-  },
+    -- treesitter
+    {
+        "nvim-treesitter/nvim-treesitter", build = ":TSUpdate"
+    },
+    "nvim-treesitter/playground",
 
-  -- text alignment by line
-  {
-    'godlygeek/tabular',
-    event = 'VeryLazy',
-  },
+    -- status line config
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+    },
 
-  -- numbered tabs
-  'mkitt/tabline.vim',
+    -- text alignment by line
+    {
+        'godlygeek/tabular',
+        event = 'VeryLazy',
+    },
 
-  -- markdown files open in browswer
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-  },
+    -- numbered tabs
+    'mkitt/tabline.vim',
 
-  -- surround
-  'tpope/vim-surround',
+    -- markdown files open in browswer
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 
-  -- allow plugins to use repeat
-  "tpope/vim-repeat",
+    -- surround
+    'tpope/vim-surround',
 
-  -- "f" to two char patterns
-  'justinmk/vim-sneak',
+    -- allow plugins to use repeat
+    "tpope/vim-repeat",
 
-  -- auto comment commands
-  "tpope/vim-commentary",
+    -- "f" to two char patterns
+    'justinmk/vim-sneak',
 
-  -- git
-  "tpope/vim-fugitive",
+    -- auto comment commands
+    "tpope/vim-commentary",
 
-  -- undotree
-  "mbbill/undotree",
+    -- git
+    "tpope/vim-fugitive",
 
-  -- vim/tmux navigator
-  "christoomey/vim-tmux-navigator",
+    -- undotree
+    "mbbill/undotree",
 
-  -- trouble
-  {
-    "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        use_diagnostic_signs = true,
-        icons = false
-      }
-    end
-  },
+    -- vim/tmux navigator
+    "christoomey/vim-tmux-navigator",
 
-  -- LSP support
-  {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
-  {"neovim/nvim-lspconfig"},
-  {"williamboman/mason.nvim"},
-  {"williamboman/mason-lspconfig.nvim"},
+    -- trouble
+    {
+        "folke/trouble.nvim",
+        dependencies = "nvim-tree/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                use_diagnostic_signs = true,
+                icons = false
+            }
+        end
+    },
 
-  -- autocompletion
-  {"hrsh7th/nvim-cmp"},
-  {"hrsh7th/cmp-buffer"},
-  {"hrsh7th/cmp-path"},
-  {"hrsh7th/cmp-nvim-lsp"},
-  {"hrsh7th/cmp-nvim-lua"},
-  {"hrsh7th/cmp-cmdline"},
-  {"saadparwaiz1/cmp_luasnip"},
-  {"L3MON4D3/LuaSnip"},
-  {"rafamadriz/friendly-snippets"},
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {},
-    config = function(_, opts) require'lsp_signature'.setup(opts) end
-  }
+    -- LSP support
+    {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
+    {"neovim/nvim-lspconfig"},
+    {"williamboman/mason.nvim"},
+    {"williamboman/mason-lspconfig.nvim"},
+
+    -- autocompletion
+    {"hrsh7th/nvim-cmp"},
+    {"hrsh7th/cmp-buffer"},
+    {"hrsh7th/cmp-path"},
+    {"hrsh7th/cmp-nvim-lsp"},
+    {"hrsh7th/cmp-nvim-lua"},
+    {"hrsh7th/cmp-cmdline"},
+    {"saadparwaiz1/cmp_luasnip"},
+    {"L3MON4D3/LuaSnip"},
+    {"rafamadriz/friendly-snippets"},
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function(_, opts) require'lsp_signature'.setup(opts) end
+    }
 });
