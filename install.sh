@@ -68,10 +68,11 @@ make_link "$SCRIPT_DIR/editor/nvim/" "$HOME/.config/" "$force_flag"
 make_link "$SCRIPT_DIR/editor/.vimrc" "$HOME/.vimrc" "$force_flag"
 
 # shell
-make_link "$SCRIPT_DIR/shell/.tmux.conf" "$HOME/.tmux.conf" "$force_flag"
-make_link "$SCRIPT_DIR/shell/.bashrc" "$HOME/.bashrc" "$force_flag"
-make_link "$SCRIPT_DIR/shell/.inputrc" "$HOME/.inputrc" "$force_flag"
-make_link "$SCRIPT_DIR/shell/.bash_aliases" "$HOME/.bash_aliases" "$force_flag"
+make_link "$SCRIPT_DIR/home/.tmux.conf" "$HOME/.tmux.conf" "$force_flag"
+make_link "$SCRIPT_DIR/home/.bashrc" "$HOME/.bashrc" "$force_flag"
+make_link "$SCRIPT_DIR/home/.inputrc" "$HOME/.inputrc" "$force_flag"
+make_link "$SCRIPT_DIR/home/.bash_aliases" "$HOME/.bash_aliases" "$force_flag"
+make_link "$SCRIPT_DIR/home/.gitconfig" "$HOME/.gitconfig" "$force_flag"
 
 # bin
 make_link "$SCRIPT_DIR/bin/tde.sh" "$HOME/.local/bin/tde" "$force_flag"
