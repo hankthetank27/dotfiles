@@ -45,10 +45,31 @@ return require('lazy').setup({
     "savq/melange-nvim",
 
     -- treesitter
+    --
+    -- local dev
+    -- {
+    --     dir = '~/programming_projects/nvim-treesitter',
+    -- },
     {
         "nvim-treesitter/nvim-treesitter", build = ":TSUpdate"
     },
+    -- being deprecated but still usefull atm
     "nvim-treesitter/playground",
+
+    {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
+    },
+
+    {
+        "rest-nvim/rest.nvim",
+        ft = "http",
+        dependencies = { "luarocks.nvim" },
+        config = function()
+            require("rest-nvim").setup()
+        end,
+    },
 
     -- status line config
     {

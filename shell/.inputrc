@@ -3,9 +3,7 @@ set keymap vi-command
 # Vim style history search
 "\C-k": history-search-backward
 "\C-j": history-search-forward
+"v":redraw-current-line
 
 set keymap vi-insert
 "jj": "\e"
-
-set keymap vi-command
-"v":redraw-current-line
