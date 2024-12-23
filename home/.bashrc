@@ -1,7 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -81,12 +77,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ aliases ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ aliases ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -98,24 +89,33 @@ fi
 bind 'set bell-style none'
 
 # gui
-if command -v ip &> /dev/null
-then
+if command -v ip &> /dev/null; then
     export DISPLAY=$(ip route | awk '{print $3; exit}'):0
 fi
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PATH, ENV, etc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#deno path
-export PATH="/home/henrye/.deno/bin:$PATH"
-
-[ -f "/home/henrye/.ghcup/env" ] && source "/home/henrye/.ghcup/env" # ghcup-env
-
-if [ -f $HOME/.cargo/env ]; then
-    . "$HOME/.cargo/env"
+if [ -d "$HOME/.deno/bin" ]; then
+    export PATH="$HOME/.deno/bin:$PATH"
 fi
 
-if [ -f ~/.rbenv/bin/rbenv ]; then
-    eval "$(~/.rbenv/bin/rbenv init - bash)"
+if [ -d "/Applications/Conveyor.app/Contents/MacOS" ]; then
+    export PATH="$PATH:/Applications/Conveyor.app/Contents/MacOS"
 fi
 
-export PATH="$PATH:/Applications/Conveyor.app/Contents/MacOS"
+
+if [ -f "$HOME/.ghcup/env" ]; then
+    source "$HOME/.ghcup/env"
+fi
+
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
+
+if [ -f "$HOME/.rbenv/bin/rbenv" ]; then
+    eval "$("$HOME/.rbenv/bin/rbenv" init - bash)"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
