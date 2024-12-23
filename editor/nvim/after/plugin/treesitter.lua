@@ -62,11 +62,10 @@ require'nvim-treesitter.configs'.setup {
 
 require"vim.treesitter.query".add_directive("set-lang-by-filetype!", function (_, _, bufnr, pred, metadata)
     local function find_nth_dot_from_end(str, n)
-        local count = 0
         for i = #str, 1, -1 do
             if str:sub(i, i) == "." then
-                count = count + 1
-                if count == n then
+                n = n - 1
+                if n <= 0 then
                     return i
                 end
             end
@@ -74,8 +73,8 @@ require"vim.treesitter.query".add_directive("set-lang-by-filetype!", function (_
         return nil
     end
     local filename = vim.fn.expand("#"..bufnr..":t")
-    local dots_in_filename = select(2, string.gsub(pred[2], "%.", "")) + 1
-    local extension_index = find_nth_dot_from_end(filename, dots_in_filename)
+    local dots_in_extension = select(2, string.gsub(pred[2], "%.", "")) + 1
+    local extension_index = find_nth_dot_from_end(filename, dots_in_extension)
     if not extension_index then
         return
     end

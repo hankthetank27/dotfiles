@@ -117,3 +117,5 @@ fi
 if [ -f ~/.rbenv/bin/rbenv ]; then
     eval "$(~/.rbenv/bin/rbenv init - bash)"
 fi
+
+export PATH="$PATH:/Applications/Conveyor.app/Contents/MacOS"

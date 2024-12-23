@@ -29,17 +29,17 @@ create_detached_session() {
     tmux new-session -s $session_name -d -x "$(tput cols)" -y "$(tput lines)" -c $path_name
     tmux rename-window -t "$session_name:0" 'main'
     tmux send-keys -t "$session_name:0.0" "vim $path_name" Enter
-    tmux splitw -v -t "$session_name:0.0" -c $path_name
+    # tmux splitw -v -t "$session_name:0.0" -c $path_name
     tmux neww -d -a -t "$session_name:main" -c $path_name
     tmux selectw -t "$session_name:main"
     tmux select-pane -t "$session_name:0.0"
 
-    spilt_ratio=$(($(tput lines) / 7))
-    if (($spilt_ratio < 8)); then
-        tmux resize-pane -t "$session_name:0.1" -y 8
-    else
-        tmux resize-pane -t "$session_name:0.1" -y $spilt_ratio
-    fi
+    # spilt_ratio=$(($(tput lines) / 7))
+    # if (($spilt_ratio < 8)); then
+    #     tmux resize-pane -t "$session_name:0.1" -y 8
+    # else
+    #     tmux resize-pane -t "$session_name:0.1" -y $spilt_ratio
+    # fi
 }
 
 create_if_needed_and_attach() {

@@ -13,10 +13,14 @@ vim.opt.rtp:prepend(lazypath)
 
 
 return require('lazy').setup({
-    -- considering...
-    --
-    -- 'andymass/vim-matchup',
-    -- {"sindrets/diffview.nvim", lazy = true},
+    -- trouble error diagnostics
+    require('lazy_plugins.trouble'),
+
+    --- format on save
+    require('lazy_plugins.conform'),
+
+    -- markdown files open in browswer
+    require('lazy_plugins.markdown-preview'),
 
     -- telescope
     {
@@ -27,25 +31,10 @@ return require('lazy').setup({
     {
         'stevearc/oil.nvim',
         opts = {},
-        -- Optional dependencies
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
 
-    -- rust
-    {
-        "rust-lang/rust.vim",
-        event = "VeryLazy",
-        ft = "rust",
-        init = function()
-            vim.g.rustfmt_autosave = 1
-        end,
-    },
-
-    -- color scheme
-    "savq/melange-nvim",
-
     -- treesitter
-    --
     -- local dev
     -- {
     --     dir = '~/programming_projects/nvim-treesitter',
@@ -65,7 +54,7 @@ return require('lazy').setup({
     {
         "rest-nvim/rest.nvim",
         ft = "http",
-        dependencies = { "luarocks.nvim" },
+        -- dependencies = { "luarocks.nvim" },
         config = function()
             require("rest-nvim").setup()
         end,
@@ -83,16 +72,42 @@ return require('lazy').setup({
         event = 'VeryLazy',
     },
 
+    -- git
+    {
+        "tpope/vim-fugitive",
+        lazy = false,
+        keys = {
+            { "<leader>gs", vim.cmd.Git, desc = "Show git" },
+        },
+    },
+
+    -- undotree
+    {
+        "mbbill/undotree",
+        lazy = false,
+        keys = {
+            { "<leader>ut", vim.cmd.UndotreeToggle, desc = "Toggle undotree", },
+        },
+    },
+
+    -- LSP
+    {
+        'williamboman/mason.nvim',
+        lazy = false,
+        opts = {
+            PATH = "append"
+        },
+    },
+
+    require('lazy_plugins.lsp'),
+
+    require('lazy_plugins.autocomplete'),
+
+    -- color scheme
+    "savq/melange-nvim",
+
     -- numbered tabs
     'mkitt/tabline.vim',
-
-    -- markdown files open in browswer
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
-    },
 
     -- surround
     'tpope/vim-surround',
@@ -106,47 +121,10 @@ return require('lazy').setup({
     -- auto comment commands
     "tpope/vim-commentary",
 
-    -- git
-    "tpope/vim-fugitive",
-
-    -- undotree
-    "mbbill/undotree",
-
     -- vim/tmux navigator
     "christoomey/vim-tmux-navigator",
 
-    -- trouble
-    {
-        "folke/trouble.nvim",
-        dependencies = "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("trouble").setup {
-                use_diagnostic_signs = true,
-                icons = false
-            }
-        end
-    },
-
-    -- LSP support
-    {"VonHeikemen/lsp-zero.nvim", branch = 'v3.x',},
-    {"neovim/nvim-lspconfig"},
-    {"williamboman/mason.nvim"},
-    {"williamboman/mason-lspconfig.nvim"},
-
-    -- autocompletion
-    {"hrsh7th/nvim-cmp"},
-    {"hrsh7th/cmp-buffer"},
-    {"hrsh7th/cmp-path"},
-    {"hrsh7th/cmp-nvim-lsp"},
-    {"hrsh7th/cmp-nvim-lua"},
-    {"hrsh7th/cmp-cmdline"},
-    {"saadparwaiz1/cmp_luasnip"},
-    {"L3MON4D3/LuaSnip"},
-    {"rafamadriz/friendly-snippets"},
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        opts = {},
-        config = function(_, opts) require'lsp_signature'.setup(opts) end
-    }
+    -- 'andymass/vim-matchup',
+    -- {"sindrets/diffview.nvim", lazy = true},
+    --
 });
