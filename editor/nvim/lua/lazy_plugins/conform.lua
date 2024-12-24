@@ -13,11 +13,14 @@ return {
         },
     },
     opts = {
+        async = true,
         formatters_by_ft = {
             rust = { "rustfmt" },
             -- lua = { "stylua" },
             -- javascript = { "prettierd", "prettier", stop_after_first = true },
         },
-        format_on_save = { timeout_ms = 500 },
+        format_on_save = {
+            timeout_ms = 500
+        },
     },
 }

@@ -28,28 +28,17 @@ return require('lazy').setup({
         dependencies = { {"nvim-lua/plenary.nvim"} }
     },
 
-    {
-        'stevearc/oil.nvim',
-        opts = {},
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
+    require('lazy_plugins.oil'),
 
-    -- treesitter
-    -- local dev
-    -- {
-    --     dir = '~/programming_projects/nvim-treesitter',
-    -- },
-    {
-        "nvim-treesitter/nvim-treesitter", build = ":TSUpdate"
-    },
+    require('lazy_plugins.treesitter'),
     -- being deprecated but still usefull atm
     "nvim-treesitter/playground",
 
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1000,
-        config = true,
-    },
+    -- {
+    --     "vhyrro/luarocks.nvim",
+    --     priority = 1000,
+    --     config = true,
+    -- },
 
     {
         "rest-nvim/rest.nvim",

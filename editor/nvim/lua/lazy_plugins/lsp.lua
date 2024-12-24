@@ -40,6 +40,7 @@ return {
                 vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
                 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
                 vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+                vim.keymap.set('n', '<leader>ee', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
                 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
                 vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
@@ -70,19 +71,18 @@ return {
 
                 -- ts/js
                 ts_ls = function ()
-                    local ts_opts = {
+                    require('lspconfig').ts_ls.setup({
                         settings = {
                             -- completions = {
                             --     completeFunctionCalls = true
                             -- }
                         }
-                    }
-                    require('lspconfig').ts_ls.setup(ts_opts)
+                    })
                 end,
 
                 -- rust
                 rust_analyzer = function ()
-                    local rust_opts = {
+                    require('lspconfig').rust_analyzer.setup({
                         settings = {
                             ["rust-analyzer"] = {
                                 cargo = {
@@ -91,13 +91,12 @@ return {
                                 -- completion.autoimport.enable = false,
                             }
                         }
-                    }
-                    require('lspconfig').rust_analyzer.setup(rust_opts)
+                    })
                 end,
 
                 -- lua
                 lua_ls = function()
-                    local lua_ls_opts = {
+                    require('lspconfig').lua_ls.setup({
                         settings = {
                             Lua = {
                                 diagnostics = {
@@ -111,8 +110,7 @@ return {
                                 },
                             },
                         }
-                    }
-                    require('lspconfig').lua_ls.setup(lua_ls_opts)
+                    })
                 end,
 
                 -- shopify liquid

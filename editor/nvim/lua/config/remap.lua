@@ -12,8 +12,18 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- centers half screen jump
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+local function lazy_remove_flicker(keys)
+    keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+    return function()
+        local old = vim.o.lazyredraw
+        vim.o.lazyredraw = true
+        vim.api.nvim_feedkeys(keys, 'nx', false)
+        vim.o.lazyredraw = old
+    end
+end
+
+vim.keymap.set("n", "<C-d>", lazy_remove_flicker("<C-d>zz"))
+vim.keymap.set("n", "<C-u>", lazy_remove_flicker("<C-u>zz"))
 
 -- centers search terms
 vim.keymap.set("n", "n", "nzzzv")
@@ -40,4 +50,11 @@ for i = 1, 9 do
     vim.keymap.set("n", string.format("<leader>%d", i), string.format("%dgt", i))
 end
 vim.keymap.set("n", "<leader>0", ":tablast<cr>")
+
+vim.keymap.set("n", "<leader>prf", function ()
+    print("Running profile")
+    vim.cmd('profile start profile.log')
+    vim.cmd('profile func *')
+    vim.cmd('profile file *')
+end, {desc = "Run profile"})
 
