@@ -69,7 +69,7 @@ make_link "$SCRIPT_DIR/editor/.vimrc" "$HOME/.vimrc" "$force_flag"
 make_link "$SCRIPT_DIR/editor/zed/keymap.json" "$HOME/.config/zed/keymap.json" "$force_flag"
 make_link "$SCRIPT_DIR/editor/zed/settings.json" "$HOME/.config/zed/settings.json" "$force_flag"
 
-# shell
+# home/shell
 make_link "$SCRIPT_DIR/home/.tmux.conf" "$HOME/.tmux.conf" "$force_flag"
 make_link "$SCRIPT_DIR/home/.bashrc" "$HOME/.bashrc" "$force_flag"
 make_link "$SCRIPT_DIR/home/.inputrc" "$HOME/.inputrc" "$force_flag"
@@ -81,7 +81,6 @@ make_link "$SCRIPT_DIR/home/kitty/" "$HOME/.config/" "$force_flag"
 make_link "$SCRIPT_DIR/bin/tde.sh" "$HOME/.local/bin/tde" "$force_flag"
 
 # assets
-# 
 FONT_DIR="$SCRIPT_DIR/assets/fonts"
 OS=$(uname)
 
@@ -89,7 +88,6 @@ install_font() {
     local src="$1"
     local dest="$2"
     local filename=$(basename "$src")
-    
     if [ -f "$dest/$filename" ]; then
         echo "Skipping $filename - already exists"
     else

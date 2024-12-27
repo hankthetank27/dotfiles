@@ -19,11 +19,29 @@
 
 {
   "base_keymap": "VSCode",
-  "theme": "Gruvbox Dark",
   "ui_font_size": 14,
-  "buffer_font_size": 12,
+  "buffer_font_size": 14,
+  "buffer_font_family": "Inconsolata Nerd Font",
   "vim_mode": true,
   "relative_line_numbers": true,
+  "theme": "Melange Dark",
+  "experimental.theme_overrides": {
+    "syntax": {
+      "keyword": {
+        "color": "#e49b5d"
+      }
+      // "enum": {
+      //   "color": "#b380b0"
+      // },
+      // "macro": {
+      //   "color": "#cc5f5f"
+      // }
+    },
+    "panel.background": "#211f1d",
+    "terminal.background": "#211f1d",
+    "editor.background": "#211f1d",
+    "editor.gutter.background": "#211f1d"
+  },
   "tab_bar": {
     "show": true
   },
@@ -46,4 +64,3 @@
     "metrics": false
   }
 }
-
