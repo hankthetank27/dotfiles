@@ -37,7 +37,8 @@
       // Chat with AI
       "space a c": "assistant::ToggleFocus",
       // Go to file with `gf`
-      "g f": "editor::OpenExcerpts"
+      "g f": "editor::OpenExcerpts",
+      "-": "workspace::ToggleLeftDock"
     }
   },
   {
@@ -91,11 +92,11 @@
       // Close other items
       "space b o": "pane::CloseInactiveItems",
       // Save file
-      "ctrl-s": "workspace::Save",
+      "space w": "workspace::Save",
       // File finder
-      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
       // Project search
-      "space /": "pane::DeploySearch",
+      "space f s": "pane::DeploySearch",
       // TODO: Open other files
       // Show project panel with current file
       "space e": "pane::RevealInProjectPanel"
@@ -106,7 +107,7 @@
     "context": "EmptyPane || SharedScreen",
     "bindings": {
       // Open file finder
-      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
       // Open recent project
       "space f p": "projects::OpenRecent"
     }
@@ -177,7 +178,8 @@
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "-": "workspace::ToggleLeftDock"
     }
   },
   // Panel nagivation
@@ -187,7 +189,8 @@
       "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"],
+      "-": "workspace::ToggleLeftDock"
     }
   },
   {
@@ -205,4 +208,3 @@
     }
   }
 ]
-

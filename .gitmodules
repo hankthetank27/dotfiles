@@ -1,3 +1,6 @@
 [submodule "home/tmux-sensible"]
 	path = home/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "home/kitty/kitty-themes"]
+	path = home/kitty/kitty-themes
+	url = git@github.com:dexpota/kitty-themes.git
