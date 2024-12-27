@@ -66,6 +66,8 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 # editor
 make_link "$SCRIPT_DIR/editor/nvim/" "$HOME/.config/" "$force_flag"
 make_link "$SCRIPT_DIR/editor/.vimrc" "$HOME/.vimrc" "$force_flag"
+make_link "$SCRIPT_DIR/editor/zed/keymap.json" "$HOME/.config/zed/keymap.json" "$force_flag"
+make_link "$SCRIPT_DIR/editor/zed/settings.json" "$HOME/.config/zed/settings.json" "$force_flag"
 
 # shell
 make_link "$SCRIPT_DIR/home/.tmux.conf" "$HOME/.tmux.conf" "$force_flag"
