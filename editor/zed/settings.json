@@ -29,18 +29,24 @@
     "syntax": {
       "keyword": {
         "color": "#e49b5d"
-      }
+      },
+      // "import": {
+      //   "color": "#e49b5d"
+      // }
       // "enum": {
       //   "color": "#b380b0"
       // },
-      // "macro": {
-      //   "color": "#cc5f5f"
-      // }
+      "attribute": {
+        "color": "#cc5f5f"
+      }
     },
     "panel.background": "#211f1d",
     "terminal.background": "#211f1d",
     "editor.background": "#211f1d",
     "editor.gutter.background": "#211f1d"
+  },
+  "buffer_line_height": {
+    "custom": 1.1
   },
   "tab_bar": {
     "show": true
@@ -51,13 +57,22 @@
   "indent_guides": {
     "enabled": true
   },
-  "inlay_hints": {
-    "enabled": true
-  },
+  // "inlay_hints": {
+  //   "enabled": true,
+  //   "show_parameter_hints": false,
+  //   "show_other_hints": false
+  // },
   "terminal": {
     "env": {
       "EDITOR": "zed --wait"
-    }
+    },
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default"
+      }
+    },
+    "zoom": true
   },
   "telemetry": {
     "diagnostics": false,

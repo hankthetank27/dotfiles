@@ -4,10 +4,15 @@
 // documentation: https://zed.dev/docs/key-bindings
 //
 // To see the default key bindings run `zed: open default keymap`
-// from the command palette.
-
-// keymap.json, generated at Thu Nov 07 2024 18:01:50 GMT+0800 (Singapore Standard Time)
 [
+  {
+    "bindings": {
+      "ctrl-k": "menu::SelectPrev",
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-c": "menu::Cancel",
+      "ctrl-[": "menu::Cancel"
+    }
+  },
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
@@ -109,7 +114,8 @@
       // Open file finder
       "space f f": "file_finder::Toggle",
       // Open recent project
-      "space f p": "projects::OpenRecent"
+      "space f p": "projects::OpenRecent",
+      "-": "workspace::ToggleLeftDock"
     }
   },
   // Comment code
@@ -203,18 +209,55 @@
     }
   },
   {
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "shift-h": "pane::ActivatePrevItem",
+      "shift-l": "pane::ActivateNextItem",
+      "ctrl-[": "pane::CloseActiveItem",
+      "ctrl-c": "pane::CloseActiveItem"
+    }
+  },
+  {
+    "context": "ProjectSearchView",
+    "bindings": {
+      "ctrl-[": "pane::CloseActiveItem",
+      "ctrl-c": "pane::CloseActiveItem"
+    }
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "ctrl-[": "buffer_search::Dismiss",
+      "ctrl-c": "buffer_search::Dismiss"
+    }
+  },
+  {
+    "context": "FileFinder && !menu_open",
+    "bindings": {
+      "space p": "file_finder::SelectPrev"
+    }
+  },
+  {
     "context": "Workspace",
     "bindings": {
-      // Map VSCode like keybindings
       "shift": "workspace::ToggleRightDock"
     }
   },
-  // Run nearest task
   {
-    "context": "EmptyPane || SharedScreen || vim_mode == normal",
+    "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
-      "space r t": ["editor::SpawnNearestTask", { "reveal": "no_focus" }],
-      "-": "workspace::ToggleLeftDock"
+      "space t": "workspace::NewCenterTerminal"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-k": [
+        "projects::OpenRecent",
+        {
+          "create_new_window": false
+        }
+      ]
     }
   }
 ]
