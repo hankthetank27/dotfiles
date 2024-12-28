@@ -10,7 +10,7 @@ cmd - 7 : open -a "Microsoft Outlook"
 # fullscreen current window
 alt - f : yabai -m window --grid 1:1:0:0:1:1
 
-# split screen browswer and terminal
+# split screen browser and terminal
 alt + shift - s : 
     FIREFOX_ID=$(yabai -m query --windows | jq '.[] | select(.app=="Firefox Developer Edition") | .id') && \
     TERMINAL_ID=$(yabai -m query --windows | jq '.[] | select(.app=="kitty") | .id') && \
@@ -20,6 +20,6 @@ alt + shift - s :
     yabai -m window $FIREFOX_ID --grid 1:2:1:0:1:1 && \
     yabai -m window $TERMINAl_ID --focus
 
-# fullscreen browswer and termial
+# fullscreen browser and termial
 alt + shift - f : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Firefox Developer Edition") | .id') --grid 1:1:0:0:1:1 && \
                   yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="kitty") | .id') --grid 1:1:0:0:1:1
