@@ -65,6 +65,7 @@ return {
                 'rust_analyzer',
                 'gopls',
                 'theme_check',
+                'bashls'
             },
 
             handlers = {
@@ -110,6 +111,13 @@ return {
                                 },
                             },
                         }
+                    })
+                end,
+
+                -- bash
+                bashls = function ()
+                    require('lspconfig').bashls.setup({
+                        filetype = { 'sh' },
                     })
                 end,
 
