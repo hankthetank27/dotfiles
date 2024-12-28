@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# MacOS window manager
+# https://github.com/koekeishiya/yabai
+
+# Disable all automatic window management
+yabai -m config window_placement off
+yabai -m config window_topmost off
+yabai -m config window_shadow off
+yabai -m config window_opacity off
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 1.0
+yabai -m config split_ratio 0.50
+yabai -m config auto_balance off
+
+# Disable all signals and rules
+yabai -m signal --remove "window_created"
+yabai -m signal --remove "window_destroyed"
+yabai -m signal --remove "window_focused"
+yabai -m signal --remove "window_moved"
+yabai -m signal --remove "window_resized"
+yabai -m rule --remove ".*"

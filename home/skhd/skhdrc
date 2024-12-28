@@ -1,0 +1,25 @@
+# MacOS system hotkeys
+# https://github.com/koekeishiya/skhd
+
+# apps
+cmd - 0 : open -a "Firefox Developer Edition"
+cmd - 9 : open -a "kitty"
+cmd - 8 : open -a "Microsoft Teams"
+cmd - 7 : open -a "Microsoft Outlook"
+
+# fullscreen current window
+alt - f : yabai -m window --grid 1:1:0:0:1:1
+
+# split screen browswer and terminal
+alt + shift - s : 
+    FIREFOX_ID=$(yabai -m query --windows | jq '.[] | select(.app=="Firefox Developer Edition") | .id') && \
+    TERMINAL_ID=$(yabai -m query --windows | jq '.[] | select(.app=="kitty") | .id') && \
+    yabai -m window $FIREFOX_ID --focus && \
+    yabai -m window $TERMINAL_ID --focus && \
+    yabai -m window $TERMINAL_ID --grid 1:2:0:0:1:1 && \
+    yabai -m window $FIREFOX_ID --grid 1:2:1:0:1:1 && \
+    yabai -m window $TERMINAl_ID --focus
+
+# fullscreen browswer and termial
+alt + shift - f : yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="Firefox Developer Edition") | .id') --grid 1:1:0:0:1:1 && \
+                  yabai -m window $(yabai -m query --windows | jq '.[] | select(.app=="kitty") | .id') --grid 1:1:0:0:1:1

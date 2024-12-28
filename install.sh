@@ -2,6 +2,7 @@
 
 # Create symlinks for dotfiles
 
+OS=$(uname)
 RED='\033[0;31m'
 GREEN='\033[1;32m'
 YELLOW='\033[0;35m'
@@ -76,14 +77,16 @@ make_link "$SCRIPT_DIR/home/.inputrc" "$HOME/.inputrc" "$force_flag"
 make_link "$SCRIPT_DIR/home/.bash_aliases" "$HOME/.bash_aliases" "$force_flag"
 make_link "$SCRIPT_DIR/home/.gitconfig" "$HOME/.gitconfig" "$force_flag"
 make_link "$SCRIPT_DIR/home/kitty/" "$HOME/.config/" "$force_flag"
+if [ "$OS" = "Darwin" ]; then
+    make_link "$SCRIPT_DIR/home/yabai/" "$HOME/.config/" "$force_flag"
+    make_link "$SCRIPT_DIR/home/skhd/" "$HOME/.config/" "$force_flag"
+fi
 
 # bin
 make_link "$SCRIPT_DIR/bin/tde.sh" "$HOME/.local/bin/tde" "$force_flag"
 
 # assets
 FONT_DIR="$SCRIPT_DIR/assets/fonts"
-OS=$(uname)
-
 install_font() {
     local src="$1"
     local dest="$2"
