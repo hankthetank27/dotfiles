@@ -54,23 +54,20 @@ return {
         vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
         -- LSP manager
-        -- require("mason").setup()
         require('mason-lspconfig').setup({
             automatic_installation = true,
 
             ensure_installed = {
-                'lua_ls',
-                'html',
-                'ts_ls',
-                'rust_analyzer',
-                'gopls',
-                'theme_check',
-                'bashls'
+                'lua_ls', -- lua
+                'ts_ls', -- javascript/typescript
+                'rust_analyzer', -- rust
+                'theme_check', -- shopify liquid
+                'bashls', -- bash
+                'nil_ls' -- nix
             },
 
             handlers = {
 
-                -- ts/js
                 ts_ls = function ()
                     require('lspconfig').ts_ls.setup({
                         settings = {
@@ -81,7 +78,6 @@ return {
                     })
                 end,
 
-                -- rust
                 rust_analyzer = function ()
                     require('lspconfig').rust_analyzer.setup({
                         settings = {
@@ -95,7 +91,6 @@ return {
                     })
                 end,
 
-                -- lua
                 lua_ls = function()
                     require('lspconfig').lua_ls.setup({
                         settings = {
@@ -114,17 +109,19 @@ return {
                     })
                 end,
 
-                -- bash
                 bashls = function ()
                     require('lspconfig').bashls.setup({
                         filetype = { 'sh' },
                     })
                 end,
 
-                -- shopify liquid
                 theme_check = function ()
                     require('lspconfig').theme_check.setup({})
                 end,
+
+                nil_ls = function ()
+                    require('lspconfig').nil_ls.setup({})
+                end
             }
         })
 
