@@ -1,4 +1,2 @@
 { pkgs }:
-[ 
-  pkgs.ripgrep 
-]
+with pkgs; [ ]

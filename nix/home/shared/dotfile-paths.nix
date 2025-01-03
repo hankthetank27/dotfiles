@@ -14,7 +14,7 @@
   "./.tmux.conf".source = ../../../home/.tmux.conf;
   "./.bashrc".source = ../../../home/.bashrc;
   "./.inputrc".source = ../../../home/.inputrc;
-  "./.bash_aliases.conf".source =../../../home/.bash_aliases;
+  "./.bash_aliases".source =../../../home/.bash_aliases;
   "./.gitconfig".source = ../../../home/.gitconfig;
   "./.config/kitty".source = ../../../home/kitty;
 
