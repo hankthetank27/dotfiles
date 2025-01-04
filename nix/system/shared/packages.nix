@@ -1,4 +1,5 @@
-{ pkgs }:
+{ pkgs, fenix, system }:
+
 with pkgs; [
   docker
   docker-compose
@@ -30,8 +31,6 @@ with pkgs; [
 
   zig_0_12
 
-  rustup
-
   lua
 
   erlang
@@ -39,9 +38,20 @@ with pkgs; [
 
   python313
   virtualenv
-  
+
   nodePackages.npm # globally install npm
   nodePackages.prettier
   nodejs_23
   # nodejs
+
+  # rust toolchain //
+  # lets try the macos pkg way on linux and see if we can use that as shared
+  # (fenix.complete.withComponents [
+  #   "cargo"
+  #   "clippy"
+  #   "rust-src"
+  #   "rustc"
+  #   "rustfmt"
+  # ])
+  rust-analyzer-nightly
 ]

@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{ pkgs, user, ... }:
 
 {
   home-manager = {
@@ -17,54 +17,51 @@
       # release notes.
       home.stateVersion = "24.11"; # Please read the comment before changing.
 
-      # The home.packages option allows you to install Nix packages into your
-      # environment.
-      home.packages = [
-        pkgs.yabai
-        pkgs.skhd
-
-        # # It is sometimes useful to fine-tune packages, for example, by applying
-        # # overrides. You can do that directly here, just don't forget the
-        # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-        # # fonts?
-        # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-        # # You can also create simple shell scripts directly inside your
-        # # configuration. For example, this adds a command 'my-hello' to your
-        # # environment:
-        # (pkgs.writeShellScriptBin "my-hello" ''
-        #   echo "Hello, ${config.home.username}!"
-        # '')
+      home.packages = with pkgs; [
+        yabai
+        skhd
       ] ++ import ./shared/packages.nix { inherit pkgs; };
 
       home.file = {
         ".config/yabai".source = ../../home/yabai;
         ".config/skhd".source = ../../home/skhd;
-
       } // import ./shared/dotfile-paths.nix {};
 
-      # Home Manager can also manage your environment variables through
-      # 'home.sessionVariables'. These will be explicitly sourced when using a
-      # shell provided by Home Manager. If you don't want to manage your shell
-      # through Home Manager then you have to manually source 'hm-session-vars.sh'
-      # located at either
-      #
-      #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-      #
-      # or
-      #
-      #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-      #
-      # or
-      #
-      #  /etc/profiles/per-user/hjackson/etc/profile.d/hm-session-vars.sh
-      #
       home.sessionVariables = {
-        EDITOR = "vim";
+        EDITOR = "${pkgs.neovim}/bin/nvim";
+        # SHELL = "${pkgs.bashInteractive}/bin/bash";
       };
 
-      # Let Home Manager install and manage itself.
-      programs.home-manager.enable = true;
+      programs = {
+        # Let Home Manager install and manage itself.
+        home-manager.enable = true;
+
+        # kitty.enable = true;
+        bash = {
+          enable = true;
+          profileExtra = ''
+            # open file descriptor 5 such that anything written to /dev/fd/5
+            # is piped through ts and then to /tmp/timestamps
+            # exec 5> >(ts -i "%.s" >> /tmp/timestamps)
+            # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+            # export BASH_XTRACEFD="5"
+            # Enable tracing
+            # set -x
+            export BASH_SILENCE_DEPRECATION_WARNING=1
+            if [ -d "$HOME/.local/bin" ]; then
+                PATH="$HOME/.local/bin:$PATH"
+            fi
+          '';
+        };
+
+        nix-index.enable = true;
+        nix-index.enableBashIntegration = true;
+
+        neovim = {
+          viAlias = true;
+          vimAlias = true;
+        };
+      };
     };
   };
 }

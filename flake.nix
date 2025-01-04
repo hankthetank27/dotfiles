@@ -11,9 +11,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nix-darwin, nixpkgs, home-manager }:
+  outputs = { self, nix-darwin, nixpkgs, home-manager, fenix }:
     let
       darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
       user = "hjackson";
@@ -22,7 +26,7 @@
       darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system:
         nix-darwin.lib.darwinSystem {
           inherit system;
-          specialArgs = { inherit self user system; };
+          specialArgs = { inherit self user system fenix; };
           modules = [ 
             home-manager.darwinModules.home-manager
             ./nix/system/mac-sys.nix
