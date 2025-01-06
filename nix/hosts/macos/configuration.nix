@@ -43,7 +43,7 @@
       "rustc"
       "rustfmt"
     ])
-  ] ++ import ./shared/packages.nix { inherit pkgs fenix system; };
+  ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";

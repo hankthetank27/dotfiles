@@ -40,14 +40,15 @@
     in
       {
       apps = nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
+
       darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system:
         nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit self user system fenix; };
           modules = [ 
             home-manager.darwinModules.home-manager
-            ./nix/system/mac-sys.nix
-            ./nix/home/mac-home.nix
+            ./nix/hosts/macos/configuration.nix
+            ./nix/hosts/macos/home-manager.nix
           ];
         }
       );

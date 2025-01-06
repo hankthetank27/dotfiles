@@ -20,12 +20,12 @@
       home.packages = with pkgs; [
         yabai
         skhd
-      ] ++ import ./shared/packages.nix { inherit pkgs; };
+      ] ++ import ../shared/packages-home.nix { inherit pkgs; };
 
       home.file = {
-        ".config/yabai".source = ../../home/yabai;
-        ".config/skhd".source = ../../home/skhd;
-      } // import ./shared/dotfile-paths.nix {};
+        ".config/yabai".source = ../../../home/yabai;
+        ".config/skhd".source = ../../../home/skhd;
+      } // import ../shared/dotfile-paths.nix {};
 
       home.sessionVariables = {
         EDITOR = "${pkgs.neovim}/bin/nvim";
