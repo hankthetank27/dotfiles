@@ -6,6 +6,10 @@
     home = "/Users/${user}";
   };
 
+  imports = [
+    ./home.nix
+  ];
+
   # The platform the configuration will be used on.
   nixpkgs = {
     hostPlatform = {
@@ -24,34 +28,49 @@
     };
   };
 
-  # this should be set in kitty. not working atm
-  environment.variables = {
-    # SHELL = "${pkgs.bashInteractive}/bin/bash";
-    EDITOR = "vim";
+  environment = {
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    systemPackages = []
+      ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
+
+    variables = {
+      # SHELL = "${pkgs.bashInteractive}/bin/bash";
+      EDITOR = "vim";
+    };
+
+
   };
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = [ 
-    # rust toolchain
-    # we might be to do this in shared. Need to test on linux.
-    (fenix.packages.${system}.stable.withComponents [
-    # nightly -- (fenix.packages.${system}.complete.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
-  ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
-
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
-  # Set Git commit hash for darwin-version.
-  system.configurationRevision = self.rev or self.dirtyRev or null;
+  system =  {
+    stateVersion = 5;
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 5;
+    # Set Git commit hash for darwin-version.
+    configurationRevision = self.rev or self.dirtyRev or null;
+
+    defaults = {
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+        ApplePressAndHoldEnabled = false;
+
+        KeyRepeat = 2; # Values: 120, 90, 60, 30, 12, 6, 2
+        InitialKeyRepeat = 15; # Values: 120, 94, 68, 35, 25, 15
+
+        "com.apple.mouse.tapBehavior" = 1;
+        "com.apple.sound.beep.volume" = 0.0;
+        "com.apple.sound.beep.feedback" = 0;
+      };
+
+      dock = {
+        autohide = false;
+        show-recents = false;
+        launchanim = true;
+        orientation = "right";
+        tilesize = 38;
+      };
+    };
+
+  };
 }

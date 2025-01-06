@@ -44,14 +44,14 @@ with pkgs; [
   nodejs_23
   # nodejs
 
-  # rust toolchain //
-  # lets try the macos pkg way on linux and see if we can use that as shared
-  # (fenix.complete.withComponents [
-  #   "cargo"
-  #   "clippy"
-  #   "rust-src"
-  #   "rustc"
-  #   "rustfmt"
-  # ])
+  # rust toolchain
+  (fenix.packages.${system}.stable.withComponents [
+    # nightly -- (fenix.packages.${system}.complete.withComponents [
+    "cargo"
+    "clippy"
+    "rust-src"
+    "rustc"
+    "rustfmt"
+  ])
   rust-analyzer-nightly
 ]
