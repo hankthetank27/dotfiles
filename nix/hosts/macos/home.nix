@@ -41,13 +41,7 @@
         # release notes.
         home.stateVersion = "24.11"; # Please read the comment before changing.
 
-        home.packages =
-          with pkgs;
-          [
-            yabai
-            skhd
-          ]
-          ++ import ../shared/packages-home.nix { inherit pkgs; };
+        home.packages = [ ] ++ import ../shared/packages-home.nix { inherit pkgs; };
 
         home.file = {
           ".config/yabai".source = ../../../home/yabai;

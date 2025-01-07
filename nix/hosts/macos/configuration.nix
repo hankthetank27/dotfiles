@@ -56,6 +56,19 @@
     ];
   };
 
+  services = {
+    yabai = {
+      enable = true;
+      package = pkgs.yabai;
+      enableScriptingAddition = true;
+    };
+
+    skhd = {
+      enable = true;
+      package = pkgs.skhd;
+    };
+  };
+
   system = {
     stateVersion = 5;
 
