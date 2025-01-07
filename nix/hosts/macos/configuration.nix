@@ -1,4 +1,11 @@
-{ self, pkgs, user, system, fenix, ... }: 
+{
+  self,
+  pkgs,
+  user,
+  system,
+  fenix,
+  ...
+}:
 
 {
   users.users.${user} = {
@@ -31,20 +38,25 @@
   environment = {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
-    systemPackages = []
-      ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
+    systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
 
     variables = {
       # SHELL = "${pkgs.bashInteractive}/bin/bash";
       EDITOR = "vim";
     };
 
-
   };
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    trusted-users = [
+      "root"
+      "${user}"
+      "@wheel"
+    ];
+  };
 
-  system =  {
+  system = {
     stateVersion = 5;
 
     # Set Git commit hash for darwin-version.
@@ -71,6 +83,5 @@
         tilesize = 38;
       };
     };
-
   };
 }

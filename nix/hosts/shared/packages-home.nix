@@ -1,3 +1,4 @@
 { pkgs }:
 
-with pkgs; [ ]
+with pkgs;
+[ ]

@@ -32,30 +32,36 @@
     };
   };
 
-  outputs = { 
-    self, 
-    nix-darwin, 
-    nix-homebrew, 
-    homebrew-bundle,
-    homebrew-core,
-    homebrew-cask,
-    nixpkgs, 
-    home-manager, 
-    fenix 
-  }:
+  outputs =
+    {
+      self,
+      nix-darwin,
+      nix-homebrew,
+      homebrew-bundle,
+      homebrew-core,
+      homebrew-cask,
+      nixpkgs,
+      home-manager,
+      fenix,
+    }:
 
     let
-      darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
+      darwinSystems = [
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
       user = "hjackson";
 
       mkApp = scriptName: system: {
         type = "app";
-        program = "${(nixpkgs.legacyPackages.${system}.writeScriptBin scriptName ''
-          #!/usr/bin/env bash
-          PATH=${nixpkgs.legacyPackages.${system}.git}/bin:$PATH
-          echo "Running ${scriptName} for ${system}"
-          exec ${self}/nix/scripts/${system}/${scriptName}
-        '')}/bin/${scriptName}";
+        program = "${
+          (nixpkgs.legacyPackages.${system}.writeScriptBin scriptName ''
+            #!/usr/bin/env bash
+            PATH=${nixpkgs.legacyPackages.${system}.git}/bin:$PATH
+            echo "Running ${scriptName} for ${system}"
+            exec ${self}/nix/scripts/${system}/${scriptName}
+          '')
+        }/bin/${scriptName}";
       };
 
       mkDarwinApps = system: {
@@ -64,14 +70,22 @@
       };
 
     in
-      {
+    {
       apps = nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
-      darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system:
+      darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (
+        system:
         nix-darwin.lib.darwinSystem {
           inherit system;
-          specialArgs = { inherit self user system fenix; };
-          modules = [ 
+          specialArgs = {
+            inherit
+              self
+              user
+              system
+              fenix
+              ;
+          };
+          modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
             {
@@ -93,4 +107,3 @@
       );
     };
 }
-

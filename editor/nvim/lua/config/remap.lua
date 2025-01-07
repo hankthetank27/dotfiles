@@ -13,13 +13,13 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 -- centers half screen jump
 local function lazy_remove_flicker(keys)
-    keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
-    return function()
-        local old = vim.o.lazyredraw
-        vim.o.lazyredraw = true
-        vim.api.nvim_feedkeys(keys, 'nx', false)
-        vim.o.lazyredraw = old
-    end
+	keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+	return function()
+		local old = vim.o.lazyredraw
+		vim.o.lazyredraw = true
+		vim.api.nvim_feedkeys(keys, "nx", false)
+		vim.o.lazyredraw = old
+	end
 end
 
 vim.keymap.set("n", "<C-d>", lazy_remove_flicker("<C-d>zz"))
@@ -43,18 +43,17 @@ vim.keymap.set("n", "<Leader>-", "<CMD>Oil --float<CR>", { desc = "Open parent d
 vim.keymap.set("n", "Q", "<nop>")
 
 -- search for all instances currently selected text in buffer
-vim.keymap.set("v", "<leader>ls", 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>')
+vim.keymap.set("v", "<leader>ls", "y/\\V<C-R>=escape(@\",'/')<CR><CR>")
 
 -- set tab nav to numbers
 for i = 1, 9 do
-    vim.keymap.set("n", string.format("<leader>%d", i), string.format("%dgt", i))
+	vim.keymap.set("n", string.format("<leader>%d", i), string.format("%dgt", i))
 end
 vim.keymap.set("n", "<leader>0", ":tablast<cr>")
 
-vim.keymap.set("n", "<leader>prf", function ()
-    print("Running profile")
-    vim.cmd('profile start profile.log')
-    vim.cmd('profile func *')
-    vim.cmd('profile file *')
-end, {desc = "Run profile"})
-
+vim.keymap.set("n", "<leader>prf", function()
+	print("Running profile")
+	vim.cmd("profile start profile.log")
+	vim.cmd("profile func *")
+	vim.cmd("profile file *")
+end, { desc = "Run profile" })

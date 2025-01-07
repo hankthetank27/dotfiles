@@ -1,11 +1,15 @@
-{ pkgs, fenix, system }:
+{
+  pkgs,
+  fenix,
+  system,
+}:
 
-with pkgs; [
+with pkgs;
+[
   docker
   docker-compose
 
   vim
-  neovim
   tmux
 
   htop
@@ -13,7 +17,7 @@ with pkgs; [
   coreutils
   ffmpeg
   bash-completion
-  ripgrep 
+  ripgrep
   jq
   tree-sitter
   shopify-cli
@@ -22,6 +26,10 @@ with pkgs; [
   wget
   openssl
   openssl_3
+  unzip
+
+  gcc
+  clang-tools
 
   sqlite
   mongosh
@@ -51,7 +59,20 @@ with pkgs; [
     "clippy"
     "rust-src"
     "rustc"
+  ])
+
+  #lsp
+  rust-analyzer-nightly
+  typescript-language-server
+  nil
+  lua-language-server
+  bash-language-server
+
+  #fmt
+  stylua
+  (fenix.packages.${system}.stable.withComponents [
+    # nightly -- (fenix.packages.${system}.complete.withComponents [
     "rustfmt"
   ])
-  rust-analyzer-nightly
+  nixfmt-rfc-style
 ]
