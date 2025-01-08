@@ -53,6 +53,8 @@
           # SHELL = "${pkgs.bashInteractive}/bin/bash";
         };
 
+        fonts.fontconfig.enable = true;
+
         programs = {
           # Let Home Manager install and manage itself.
           home-manager.enable = true;

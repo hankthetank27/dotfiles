@@ -30,14 +30,13 @@ with pkgs;
         conform-nvim
 
         # markdown
-        # markdown-preview
+        markdown-preview-nvim
 
         # oil FS
         oil-nvim
         nvim-web-devicons
 
         # treesitter
-        # treesitterWithGrammars
         nvim-treesitter.withAllGrammars
 
         # trouble

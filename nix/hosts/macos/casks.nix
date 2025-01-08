@@ -5,10 +5,10 @@ _:
   # "homebrew/cask/docker"
   # "zed"
   # "visual-studio-code"
-  # "kitty"
+  "kitty"
 
   # Communication Tools
-  # "discord"
+  "discord"
   "signal"
   # "zoom"
 
