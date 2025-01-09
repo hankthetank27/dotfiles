@@ -6,9 +6,6 @@
 
 with pkgs;
 [
-  docker
-  docker-compose
-
   vim
   tmux
 

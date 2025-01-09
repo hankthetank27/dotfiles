@@ -88,7 +88,11 @@
             plugins = with pkgs; [
               tmuxPlugins.sensible
             ];
-            extraConfig = builtins.readFile ../../../home/.tmux.conf;
+            extraConfig =
+              ''
+                set-option -g default-command "$SHELL"
+              ''
+              + builtins.readFile ../../../home/.tmux.conf;
           };
         };
 
