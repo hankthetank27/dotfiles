@@ -2,7 +2,6 @@
   user,
   system,
   fenix,
-  # hostname,
   pkgs,
   inputs,
   ...
@@ -25,6 +24,10 @@
   imports = [
     ./home.nix
   ];
+
+  nixpkgs = {
+    overlays = [ fenix.overlays.default ];
+  };
 
   environment = {
     systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };

@@ -118,25 +118,47 @@
         }
       );
 
-      wsl = nixpkgs.lib.genAttrs linuxSystems (
-        system:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit
-              self
-              user
-              system
-              fenix
-              inputs
-              ;
+      nixosConfigurations = {
+        wsl =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit
+                self
+                user
+                system
+                fenix
+                inputs
+                ;
+            };
+            modules = [
+              nixos-wsl.nixosModules.wsl
+              home-manager.nixosModules.home-manager
+              ./nix/hosts/wsl/configuration.nix
+            ];
           };
-          modules = [
-            nixos-wsl.nixosModules.wsl
-            home-manager.nixosModules.home-manager
-            ./hosts/wsl/configuration.nix
-          ];
-        }
-      );
+      };
+      # // nixpkgs.lib.genAttrs linuxSystems (
+      #   system:
+      #   nixpkgs.lib.nixosSystem {
+      #     inherit system;
+      #     specialArgs = {
+      #       inherit
+      #         self
+      #         user
+      #         system
+      #         fenix
+      #         inputs
+      #         ;
+      #     };
+      #     modules = [
+      #       home-manager.nixosModules.home-manager
+      #       ./nix/hosts/nixos/configuration.nix
+      #     ];
+      #   }
+      # );
     };
 }

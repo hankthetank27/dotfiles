@@ -22,6 +22,8 @@
 
         home.packages = [ ] ++ import ../shared/packages-home.nix { inherit pkgs; };
 
+        home.file = { } // import ../shared/dotfile-paths.nix { };
+
         home.sessionVariables = {
           EDITOR = "${pkgs.neovim}/bin/nvim";
           # SHELL = "${pkgs.bashInteractive}/bin/bash";
