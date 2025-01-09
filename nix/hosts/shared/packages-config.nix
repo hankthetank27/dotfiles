@@ -12,6 +12,7 @@ with pkgs;
   vim
   tmux
 
+  git
   htop
   flyctl
   coreutils

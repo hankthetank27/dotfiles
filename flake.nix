@@ -7,6 +7,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +34,7 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
   };
 
   outputs =
@@ -37,20 +42,27 @@
       self,
       nix-darwin,
       nix-homebrew,
+      nixos-wsl,
       homebrew-bundle,
       homebrew-core,
       homebrew-cask,
       nixpkgs,
       home-manager,
       fenix,
-    }:
+    }@inputs:
 
     let
+      user = "hjackson";
+
       darwinSystems = [
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      user = "hjackson";
+
+      linuxSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       mkApp = scriptName: system: {
         type = "app";
@@ -73,7 +85,7 @@
     {
       apps = nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
-      darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (
+      darwin = nixpkgs.lib.genAttrs darwinSystems (
         system:
         nix-darwin.lib.darwinSystem {
           inherit system;
@@ -105,5 +117,48 @@
           ];
         }
       );
+
+      nixosConfigurations = {
+        wsl =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit
+                self
+                user
+                system
+                fenix
+                inputs
+                ;
+            };
+            modules = [
+              nixos-wsl.nixosModules.wsl
+              home-manager.nixosModules.home-manager
+              ./nix/hosts/wsl/configuration.nix
+            ];
+          };
+      };
+      # // nixpkgs.lib.genAttrs linuxSystems (
+      #   system:
+      #   nixpkgs.lib.nixosSystem {
+      #     inherit system;
+      #     specialArgs = {
+      #       inherit
+      #         self
+      #         user
+      #         system
+      #         fenix
+      #         inputs
+      #         ;
+      #     };
+      #     modules = [
+      #       home-manager.nixosModules.home-manager
+      #       ./nix/hosts/nixos/configuration.nix
+      #     ];
+      #   }
+      # );
     };
 }

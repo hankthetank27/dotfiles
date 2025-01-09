@@ -6,7 +6,7 @@ RED='\033[1;31m'
 NC='\033[0m'
 
 SYSTEM_TYPE="x86_64-darwin"
-FLAKE_SYSTEM="darwinConfigurations.${SYSTEM_TYPE}.system"
+FLAKE_SYSTEM="darwin.${SYSTEM_TYPE}.system"
 
 export NIXPKGS_ALLOW_UNFREE=1
 
