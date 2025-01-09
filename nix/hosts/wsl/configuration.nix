@@ -81,6 +81,8 @@
   #   '';
   # };
 
+  programs.ssh.startAgent = true;
+
   nix = {
     settings = {
       trusted-users = [
