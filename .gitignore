@@ -3,3 +3,4 @@ profile.log
 startup.log
 **/.DS_Store
 result
+kill-webroot.sh
