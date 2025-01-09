@@ -41,8 +41,6 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  # services.openssh.enable = true;
-
   system.stateVersion = "22.05";
 
   wsl = {
@@ -56,6 +54,8 @@
     # Enable integration with Docker Desktop (needs to be installed)
     docker-desktop.enable = false;
   };
+
+  systemd.user.services.ssh-agent-proxy.serviceConfig.RuntimeDirectory = "ssh-agent";
 
   # virtualisation.docker = {
   #   enable = true;

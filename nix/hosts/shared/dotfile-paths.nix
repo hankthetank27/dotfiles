@@ -12,7 +12,7 @@ _:
   "./.config/zed/settings.json".source = ../../../editor/zed/settings.json;
 
   # home/shell
-  "./.tmux.conf".source = ../../../home/.tmux.conf;
+  # "./.tmux.conf".source = ../../../home/.tmux.conf;
   "./.bashrc".source = ../../../home/.bashrc;
   "./.inputrc".source = ../../../home/.inputrc;
   "./.bash_aliases".source = ../../../home/.bash_aliases;

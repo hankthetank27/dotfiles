@@ -31,11 +31,17 @@
 
         fonts.fontconfig.enable = true;
 
+        # trying to launch ssh-agent on startup
+        xdg.configFile."environment.d/ssh-agent.conf" = {
+          text = ''
+            SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
+          '';
+        };
+
         programs = {
           # Let Home Manager install and manage itself.
           home-manager.enable = true;
 
-          # kitty.enable = true;
           bash = {
             enable = true;
             profileExtra = ''
@@ -58,6 +64,19 @@
             vimdiffAlias = true;
             withNodeJs = true;
           } // import ../shared/packages-nvim.nix { inherit pkgs; };
+
+          tmux = {
+            enable = true;
+            plugins = with pkgs; [
+              tmuxPlugins.sensible
+            ];
+            extraConfig =
+              ''
+                set -g default-terminal "xterm-256color"
+                set-option -ga terminal-overrides ",xterm-256color:Tc"
+              ''
+              + builtins.readFile ../../../home/.tmux.conf;
+          };
         };
 
         xdg.configFile."nvim" = {
@@ -73,6 +92,7 @@
             };
           in
           "${parsers}/parser";
+
       };
   };
 }

@@ -82,6 +82,14 @@
             vimdiffAlias = true;
             withNodeJs = true;
           } // import ../shared/packages-nvim.nix { inherit pkgs; };
+
+          tmux = {
+            enable = true;
+            plugins = with pkgs; [
+              tmuxPlugins.sensible
+            ];
+            extraConfig = builtins.readFile ../../../home/.tmux.conf;
+          };
         };
 
         xdg.configFile."nvim" = {
