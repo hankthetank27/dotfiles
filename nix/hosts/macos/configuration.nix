@@ -57,8 +57,6 @@
     ];
   };
 
-  programs.ssh.startAgent = true;
-
   services = {
     yabai = {
       enable = true;
