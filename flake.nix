@@ -85,7 +85,7 @@
     {
       apps = nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
-      darwin = nixpkgs.lib.genAttrs darwinSystems (
+      darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (
         system:
         nix-darwin.lib.darwinSystem {
           inherit system;
