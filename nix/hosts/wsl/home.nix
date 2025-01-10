@@ -1,5 +1,12 @@
-{ pkgs, user, ... }:
-
+{
+  pkgs,
+  user,
+  # lib,
+  ...
+}:
+let
+  utils = import ../../utils { inherit pkgs; };
+in
 {
   home-manager = {
     useGlobalPkgs = true;
@@ -7,7 +14,6 @@
     users.${user} =
       { ... }:
       {
-
         # Home Manager needs a bit of information about you and the paths it should
         # manage.
 
@@ -20,7 +26,9 @@
         # release notes.
         home.stateVersion = "24.11"; # Please read the comment before changing.
 
-        home.packages = [ ] ++ import ../shared/packages-home.nix { inherit pkgs; };
+        home.packages =
+          utils.makeScriptsFromDir ../../../bin
+          ++ import ../shared/packages-home.nix { inherit pkgs; };
 
         home.file = { } // import ../shared/dotfile-paths.nix { };
 

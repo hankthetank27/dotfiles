@@ -18,9 +18,4 @@ _:
   "./.bash_aliases".source = ../../../home/.bash_aliases;
   "./.gitconfig".source = ../../../home/.gitconfig;
   "./.config/kitty".source = ../../../home/kitty;
-
-  # bin
-  "./.local/bin/tde".source = ../../../bin/tde.sh;
-
-  #assets
 }

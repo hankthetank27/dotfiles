@@ -1,5 +1,4 @@
 #!/bin/sh
-
 ### Tmux dev enviroment ###
 # Attach or create tmux session named the same as current directory, or path passed as argument.
 
