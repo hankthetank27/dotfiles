@@ -8,10 +8,16 @@
 }:
 
 {
+  users.knownUsers = [ "${user}" ];
+
   users.users.${user} = {
     name = "${user}";
     home = "/Users/${user}";
+    uid = 1849331601;
+    shell = pkgs.bashInteractive;
   };
+
+  programs.bash.enable = true;
 
   imports = [
     ./home.nix
@@ -39,6 +45,8 @@
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
+
+    shells = [ pkgs.bashInteractive ];
 
     variables = {
       # SHELL = "${pkgs.bashInteractive}/bin/bash";

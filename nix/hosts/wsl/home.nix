@@ -33,17 +33,18 @@ in
         home.file = { } // import ../shared/dotfile-paths.nix { };
 
         home.sessionVariables = {
-          EDITOR = "${pkgs.neovim}/bin/nvim";
-          # SHELL = "${pkgs.bashInteractive}/bin/bash";
+          EDITOR = pkgs.neovim;
         };
 
         fonts.fontconfig.enable = true;
 
         # trying to launch ssh-agent on startup
         xdg.configFile."environment.d/ssh-agent.conf" = {
-          text = ''
-            SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
-          '';
+          text =
+            # bash
+            ''
+              SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
+            '';
         };
 
         programs = {
@@ -52,12 +53,26 @@ in
 
           bash = {
             enable = true;
-            profileExtra = ''
-              export BASH_SILENCE_DEPRECATION_WARNING=1
-              if [ -d "$HOME/.local/bin" ]; then
-                  PATH="$HOME/.local/bin:$PATH"
-              fi
-            '';
+            profileExtra =
+              # bash
+              ''
+                export BASH_SILENCE_DEPRECATION_WARNING=1
+                if [ -d "$HOME/.local/bin" ]; then
+                    PATH="$HOME/.local/bin:$PATH"
+                fi
+              '';
+            bashrcExtra =
+              builtins.readFile ../../../home/.bashrc
+              +
+                # bash
+                ''
+                  #annoying windows bell sound disable
+                  bind 'set bell-style none'
+                  # gui
+                  if command -v ip &> /dev/null; then
+                      export DISPLAY=$(ip route | awk '{print $3; exit}'):0
+                  fi
+                '';
           };
 
           nix-index = {

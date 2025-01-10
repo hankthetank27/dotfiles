@@ -57,8 +57,7 @@ in
         } // import ../shared/dotfile-paths.nix { };
 
         home.sessionVariables = {
-          EDITOR = "${pkgs.neovim}/bin/nvim";
-          # SHELL = "${pkgs.bashInteractive}/bin/bash";
+          EDITOR = pkgs.neovim;
         };
 
         fonts.fontconfig.enable = true;
@@ -70,12 +69,15 @@ in
           # kitty.enable = true;
           bash = {
             enable = true;
-            profileExtra = ''
-              export BASH_SILENCE_DEPRECATION_WARNING=1
-              if [ -d "$HOME/.local/bin" ]; then
-                  PATH="$HOME/.local/bin:$PATH"
-              fi
-            '';
+            profileExtra =
+              # bash
+              ''
+                export BASH_SILENCE_DEPRECATION_WARNING=1
+                if [ -d "$HOME/.local/bin" ]; then
+                    PATH="$HOME/.local/bin:$PATH"
+                fi
+              '';
+            bashrcExtra = builtins.readFile ../../../home/.bashrc;
           };
 
           nix-index = {
