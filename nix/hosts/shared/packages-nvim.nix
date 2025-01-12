@@ -40,6 +40,7 @@ in
         #lsp
         nvim-lspconfig
         cmp-nvim-lsp
+        fidget-nvim
 
         # conform formatting
         conform-nvim

@@ -27,7 +27,6 @@ with pkgs;
   unzip
 
   gcc
-  clang-tools
 
   sqlite
   mongosh
