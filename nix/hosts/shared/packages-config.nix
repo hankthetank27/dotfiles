@@ -22,6 +22,7 @@ with pkgs;
   hugo
   cmake
   wget
+  patchelf
   openssl
   openssl_3
   unzip
