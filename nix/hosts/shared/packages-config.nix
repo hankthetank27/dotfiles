@@ -51,13 +51,28 @@ with pkgs;
   # nodejs
 
   # rust toolchain
-  (fenix.packages.${system}.stable.withComponents [
-    # nightly -- (fenix.packages.${system}.complete.withComponents [
-    "cargo"
-    "clippy"
-    "rust-src"
-    "rustc"
-  ])
+  (
+    with fenix.packages.${system};
+    combine [
+      # nightly -- (fenix.packages.${system}.complete.withComponents [
+      stable.cargo
+      stable.clippy
+      stable.rust-src
+      stable.rustc
+      targets.aarch64-unknown-linux-gnu.stable.rust-std
+      targets.x86_64-unknown-linux-gnu.stable.rust-std
+    ]
+  )
+
+  # (
+  #   with fenix.packages.${system};
+  #   combine [
+  #     # nightly -- (fenix.packages.${system}.complete.withComponents [
+  #     stable.cargo
+  #     stable.rustc
+  #     targets.aarch64-unknown-linux-gnu.stable.rust-std
+  #   ]
+  # )
 
   #lsp
   rust-analyzer-nightly

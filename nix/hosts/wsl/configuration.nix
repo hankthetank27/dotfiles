@@ -57,11 +57,11 @@
 
   systemd.user.services.ssh-agent-proxy.serviceConfig.RuntimeDirectory = "ssh-agent";
 
-  # virtualisation.docker = {
-  #   enable = true;
-  #   enableOnBoot = true;
-  #   autoPrune.enable = true;
-  # };
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    autoPrune.enable = true;
+  };
 
   # FIXME: uncomment the next block to make vscode running in Windows "just work" with NixOS on WSL
   # solution adapted from: https://github.com/K900/vscode-remote-workaround
