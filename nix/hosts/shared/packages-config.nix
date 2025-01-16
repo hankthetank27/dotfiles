@@ -58,6 +58,7 @@ with pkgs;
     "rust-src"
     "rustc"
   ])
+  cargo-cross
 
   #lsp
   rust-analyzer-nightly
