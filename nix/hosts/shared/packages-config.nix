@@ -3,8 +3,21 @@
   fenix,
   system,
 }:
-
 with pkgs;
+let
+  cargo-cross = pkgs.rustPlatform.buildRustPackage {
+    pname = "cross";
+    version = "0.2.5-nightly";
+    doCheck = false;
+    src = pkgs.fetchFromGitHub {
+      owner = "cross-rs";
+      repo = "cross";
+      rev = "4090beca3cfffa44371a5bba524de3a578aa46c3";
+      sha256 = "sha256-5wC8n6Akucs1T44BxHOO5wl19BnrTGgwD+tymxsBMik=";
+    };
+    cargoHash = "sha256-ptl3iGKcJf3EMyxQNdgkE/TYd3o8lfJKfcqVjyHSFCE=";
+  };
+in
 [
   vim
   tmux
