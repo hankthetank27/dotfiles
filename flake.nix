@@ -15,10 +15,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
     };
@@ -34,6 +30,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
@@ -48,7 +48,7 @@
       homebrew-cask,
       nixpkgs,
       home-manager,
-      fenix,
+      rust-overlay,
     }@inputs:
 
     let
@@ -94,7 +94,7 @@
               self
               user
               system
-              fenix
+              rust-overlay
               ;
           };
           modules = [
@@ -130,7 +130,7 @@
                 self
                 user
                 system
-                fenix
+                rust-overlay
                 inputs
                 ;
             };

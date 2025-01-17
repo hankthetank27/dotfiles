@@ -1,6 +1,5 @@
 {
   pkgs,
-  fenix,
   system,
 }:
 with pkgs;
@@ -64,31 +63,23 @@ in
   # nodejs
 
   # rust toolchain
-  (
-    with fenix.packages.${system};
-    combine [
-      # nightly -- (fenix.packages.${system}.complete.withComponents [
-      stable.cargo
-      stable.clippy
-      stable.rust-src
-      stable.rustc
-      targets.aarch64-unknown-linux-gnu.stable.rust-std
-      targets.x86_64-unknown-linux-gnu.stable.rust-std
-    ]
-  )
-
-  # (
-  #   with fenix.packages.${system};
-  #   combine [
-  #     # nightly -- (fenix.packages.${system}.complete.withComponents [
-  #     stable.cargo
-  #     stable.rustc
-  #     targets.aarch64-unknown-linux-gnu.stable.rust-std
-  #   ]
-  # )
+  (rust-bin.stable.latest.default.override {
+    extensions = [
+      "rust-src"
+      "rust-analyzer"
+      "rustfmt"
+    ];
+    targets = [
+      "aarch64-unknown-linux-gnu"
+      "x86_64-unknown-linux-gnu"
+      "aarch64-apple-darwin"
+      "x86_64-apple-darwin"
+      "x86_64-pc-windows-gnu"
+    ];
+  })
+  cargo-cross
 
   #lsp
-  rust-analyzer-nightly
   typescript-language-server
   nil
   lua-language-server
@@ -96,9 +87,5 @@ in
 
   #fmt
   stylua
-  (fenix.packages.${system}.stable.withComponents [
-    # nightly -- (fenix.packages.${system}.complete.withComponents [
-    "rustfmt"
-  ])
   nixfmt-rfc-style
 ]

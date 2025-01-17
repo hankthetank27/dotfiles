@@ -3,7 +3,7 @@
   pkgs,
   user,
   system,
-  fenix,
+  rust-overlay,
   ...
 }:
 
@@ -29,7 +29,7 @@
       inherit system;
     };
 
-    overlays = [ fenix.overlays.default ];
+    overlays = [ rust-overlay.overlays.default ];
 
     config = {
       allowUnfree = true;
@@ -44,7 +44,7 @@
   environment = {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
-    systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
+    systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs system; };
 
     shells = [ pkgs.bashInteractive ];
 

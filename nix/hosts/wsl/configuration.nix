@@ -1,7 +1,7 @@
 {
   user,
   system,
-  fenix,
+  rust-overlay,
   pkgs,
   inputs,
   ...
@@ -26,15 +26,17 @@
   ];
 
   nixpkgs = {
-    overlays = [ fenix.overlays.default ];
+    overlays = [ rust-overlay.overlays.default ];
   };
 
   environment = {
-    systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs fenix system; };
+    systemPackages = [
+      pkgs.alsa-lib
+      pkgs.fontconfig
+    ] ++ import ../shared/packages-config.nix { inherit pkgs system; };
     shells = [ pkgs.bash ];
     enableAllTerminfo = true;
     variables = {
-      # SHELL = "${pkgs.bashInteractive}/bin/bash";
       EDITOR = "vim";
     };
   };
@@ -50,9 +52,6 @@
     wslConf.network.generateHosts = false;
     defaultUser = "${user}";
     startMenuLaunchers = true;
-
-    # Enable integration with Docker Desktop (needs to be installed)
-    docker-desktop.enable = false;
   };
 
   systemd.user.services.ssh-agent-proxy.serviceConfig.RuntimeDirectory = "ssh-agent";
@@ -61,6 +60,8 @@
     enable = true;
     enableOnBoot = true;
     autoPrune.enable = true;
+    rootless.enable = true;
+    rootless.setSocketVariable = true;
   };
 
   # FIXME: uncomment the next block to make vscode running in Windows "just work" with NixOS on WSL
