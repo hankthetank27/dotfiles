@@ -1,6 +1,5 @@
 {
   user,
-  system,
   rust-overlay,
   pkgs,
   inputs,
@@ -33,7 +32,7 @@
     systemPackages = [
       pkgs.alsa-lib
       pkgs.fontconfig
-    ] ++ import ../shared/packages-config.nix { inherit pkgs system; };
+    ] ++ import ../shared/packages-config.nix { inherit pkgs; };
     shells = [ pkgs.bash ];
     enableAllTerminfo = true;
     variables = {

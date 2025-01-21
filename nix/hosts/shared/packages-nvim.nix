@@ -17,13 +17,6 @@ let
 in
 
 {
-  extraPackages = [
-    # Telescope
-    ripgrep
-    # treesitter
-    gcc
-  ];
-
   plugins = with pkgs.vimPlugins; [
     lazy-nvim
   ];

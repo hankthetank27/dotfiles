@@ -90,7 +90,6 @@ in
             viAlias = true;
             vimAlias = true;
             vimdiffAlias = true;
-            withNodeJs = true;
           } // import ../shared/packages-nvim.nix { inherit pkgs; };
 
           tmux = {
