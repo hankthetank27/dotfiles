@@ -44,12 +44,16 @@
   environment = {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
-    systemPackages = [ ] ++ import ../shared/packages-config.nix { inherit pkgs system; };
+    systemPackages =
+      with pkgs;
+      [
+        stdenv
+      ]
+      ++ import ../shared/packages-config.nix { inherit pkgs system; };
 
     shells = [ pkgs.bashInteractive ];
 
     variables = {
-      # SHELL = "${pkgs.bashInteractive}/bin/bash";
       EDITOR = "vim";
     };
 

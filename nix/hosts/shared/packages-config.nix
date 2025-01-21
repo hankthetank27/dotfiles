@@ -66,8 +66,6 @@ in
   (rust-bin.stable.latest.default.override {
     extensions = [
       "rust-src"
-      "rust-analyzer"
-      "rustfmt"
     ];
     targets = [
       "aarch64-unknown-linux-gnu"
@@ -80,12 +78,14 @@ in
   cargo-cross
 
   #lsp
+  rust-analyzer
   typescript-language-server
   nil
   lua-language-server
   bash-language-server
 
   #fmt
+  rustfmt
   stylua
   nixfmt-rfc-style
 ]

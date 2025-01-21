@@ -33,7 +33,7 @@ in
         home.file = { } // import ../shared/dotfile-paths.nix { };
 
         home.sessionVariables = {
-          EDITOR = pkgs.neovim;
+          EDITOR = "nvim";
         };
 
         fonts.fontconfig.enable = true;
