@@ -30,11 +30,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
@@ -48,7 +43,6 @@
       homebrew-cask,
       nixpkgs,
       home-manager,
-      rust-overlay,
     }@inputs:
 
     let
@@ -79,6 +73,7 @@
       mkDarwinApps = system: {
         "build" = mkApp "build" system;
         "build-switch" = mkApp "build-switch" system;
+        "build-switch-impure" = mkApp "build-switch-impure" system;
       };
 
     in
@@ -94,7 +89,6 @@
               self
               user
               system
-              rust-overlay
               ;
           };
           modules = [
@@ -130,7 +124,6 @@
                 self
                 user
                 system
-                rust-overlay
                 inputs
                 ;
             };

@@ -3,7 +3,6 @@
   pkgs,
   user,
   system,
-  rust-overlay,
   ...
 }:
 
@@ -29,7 +28,8 @@
       inherit system;
     };
 
-    overlays = [ rust-overlay.overlays.default ];
+    overlays = [ ];
+    # ++ import ../shared/overlays.nix { inherit system; };
 
     config = {
       allowUnfree = true;

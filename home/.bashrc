@@ -93,6 +93,9 @@ if [ -d "/Applications/Conveyor.app/Contents/MacOS" ]; then
     export PATH="$PATH:/Applications/Conveyor.app/Contents/MacOS"
 fi
 
+if [ -d "$HOME/.npm-global/bin" ]; then
+    export PATH="$HOME/.npm-global/bin:$PATH"
+fi
 
 if [ -f "$HOME/.ghcup/env" ]; then
     source "$HOME/.ghcup/env"

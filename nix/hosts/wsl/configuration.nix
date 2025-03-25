@@ -1,6 +1,5 @@
 {
   user,
-  rust-overlay,
   pkgs,
   inputs,
   ...
@@ -25,7 +24,7 @@
   ];
 
   nixpkgs = {
-    overlays = [ rust-overlay.overlays.default ];
+    overlays = [ ];
   };
 
   environment = {

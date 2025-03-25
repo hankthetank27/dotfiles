@@ -114,7 +114,24 @@ in
           let
             parsers = pkgs.symlinkJoin {
               name = "treesitter-parsers";
-              paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+              paths =
+                with pkgs.vimPlugins.nvim-treesitter;
+
+                (withPlugins (
+                  _:
+                  (builtins.map (
+                    grammar:
+                    # if grammar.pname == "liquid-grammar" then
+                    #   pkgs.tree-sitter.buildGrammar {
+                    #     language = "liquid";
+                    #     version = "0.0.1";
+                    #     src = ~/programming_projects/tree-sitter-liquid;
+                    #   }
+                    # else
+                    grammar
+                  ) allGrammars)
+
+                )).dependencies;
             };
           in
           "${parsers}/parser";

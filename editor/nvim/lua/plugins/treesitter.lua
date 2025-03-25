@@ -7,22 +7,10 @@ return {
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {},
-
-			-- sync_install = true,
-			-- Automatically install missing parsers when entering buffer
-			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-			-- auto_install = true,
-
 			highlight = {
 				enable = true,
-
-				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-				-- Using this option may slow down your editor, and you may see some duplicate highlights.
-				-- Instead of true it can also be a list of languages
 				additional_vim_regex_highlighting = false,
 			},
-
 			indent = {
 				enable = true,
 			},
@@ -49,37 +37,39 @@ return {
 			if pred[2] == filename:sub(extension_index + 1) then
 				metadata["injection.language"] = pred[3]
 			end
-		end, true)
+		end, {})
 
-		vim.treesitter.query.set(
-			"liquid",
-			"injections",
-			[[
-    ((template_content) @injection.content
-      (#set-lang-by-filetype! "liquid" "html")
-      (#set-lang-by-filetype! "js.liquid" "javascript")
-      (#set-lang-by-filetype! "css.liquid" "css")
-      (#set-lang-by-filetype! "scss.liquid" "scss")
-      (#set! injection.combined))
+		local liquid_injections = [[
+      ((template_content) @injection.content
+        (#set-lang-by-filetype! "liquid" "html")
+        (#set-lang-by-filetype! "js.liquid" "javascript")
+        (#set-lang-by-filetype! "css.liquid" "css")
+        (#set-lang-by-filetype! "scss.liquid" "scss")
+        (#set! injection.combined))
 
-    (javascript_statement
-      (js_content) @injection.content
-      (#set! injection.language "javascript")
-      (#set! injection.combined))
+      (javascript_statement
+        (js_content) @injection.content
+        (#set! injection.language "javascript")
+        (#set! injection.combined))
 
-    (schema_statement
-      (json_content) @injection.content
-      (#set! injection.language "json")
-      (#set! injection.combined))
+      (schema_statement
+        (json_content) @injection.content
+        (#set! injection.language "json")
+        (#set! injection.combined))
 
-    (style_statement
-      (style_content) @injection.content
-      (#set! injection.language "css")
-      (#set! injection.combined))
+      (style_statement
+        (style_content) @injection.content
+        (#set! injection.language "css")
+        (#set! injection.combined))
 
-    ((comment) @injection.content
-      (#set! injection.language "comment"))
+      ((comment) @injection.content
+        (#set! injection.language "comment"))
     ]]
-		)
+
+		vim.treesitter.query.set("liquid", "injections", liquid_injections)
 	end,
 }
+-- ((front_matter) @injection.content
+--     (#set! injection.language "yaml")
+--     (#offset! @injection.content 1 0 -1 0)
+--     (#set! injection.include-children))

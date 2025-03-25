@@ -11,7 +11,7 @@ let
       rev = "4090beca3cfffa44371a5bba524de3a578aa46c3";
       sha256 = "sha256-5wC8n6Akucs1T44BxHOO5wl19BnrTGgwD+tymxsBMik=";
     };
-    cargoHash = "sha256-ptl3iGKcJf3EMyxQNdgkE/TYd3o8lfJKfcqVjyHSFCE=";
+    cargoHash = "sha256-cQ7RZxgh/EA4gaq+USIqdrjwLHs+76Bf/GIjtdDWdHk=";
   };
 in
 [
@@ -42,24 +42,16 @@ in
   # language toolchains etc
   cmake
 
-  (rust-bin.stable.latest.default.override {
-    extensions = [
-      "rust-src"
-    ];
-    targets = [
-      "aarch64-unknown-linux-gnu"
-      "x86_64-unknown-linux-gnu"
-      "aarch64-apple-darwin"
-      "x86_64-apple-darwin"
-      "x86_64-pc-windows-gnu"
-    ];
-  })
+  rustup
   cargo-cross
+  cargo-udeps
 
   nodePackages.npm # globally install npm
   nodePackages.prettier
   nodejs
-  deno
+  corepack
+  yarn
+  # deno
 
   ruby
   rbenv
@@ -83,7 +75,7 @@ in
   nix-update # swiss-knife for updating nix packages
 
   #lsp
-  rust-analyzer
+  # rust-analyzer
   typescript-language-server
   nil
   lua-language-server

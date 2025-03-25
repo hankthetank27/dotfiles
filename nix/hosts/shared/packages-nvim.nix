@@ -46,7 +46,8 @@ in
         nvim-web-devicons
 
         # treesitter
-        nvim-treesitter.withAllGrammars
+        # grammar config is in  host/*/config/home.nix @ xdg.configFile."nvim/parser"
+        nvim-treesitter
 
         # trouble
         trouble-nvim
@@ -55,6 +56,8 @@ in
         telescope-fzf-native-nvim
         telescope-nvim
         plenary-nvim
+
+        nvim-autopairs # not in use
 
         lualine-nvim
 
