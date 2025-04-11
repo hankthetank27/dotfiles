@@ -11,7 +11,7 @@ let
       rev = "4090beca3cfffa44371a5bba524de3a578aa46c3";
       sha256 = "sha256-5wC8n6Akucs1T44BxHOO5wl19BnrTGgwD+tymxsBMik=";
     };
-    cargoHash = "sha256-cQ7RZxgh/EA4gaq+USIqdrjwLHs+76Bf/GIjtdDWdHk=";
+    cargoHash = "sha256-8a9SJuz16MUYz8ePVtXwl0dmtjrCvZabTZwiwz45/PQ=";
   };
 in
 [
@@ -19,6 +19,8 @@ in
   coreutils
   htop
   ffmpeg
+  id3v2
+  flac
   bash-completion
   ripgrep
   jq
@@ -29,6 +31,7 @@ in
   unzip
   unrar
   xz
+  sops
 
   # db
   sqlite
@@ -53,12 +56,15 @@ in
   yarn
   # deno
 
-  ruby
-  rbenv
+  # ruby
+  # rbenv
 
   zig
 
   lua
+
+  go
+  gotools
 
   elixir
 
