@@ -88,6 +88,10 @@ return {
 			filetype = { "sh" },
 		})
 
+		lspconfig.elixirls.setup({
+			cmd = { "elixir-ls" },
+		})
+
 		lspconfig.theme_check.setup({})
 
 		lspconfig.nil_ls.setup({

@@ -15,6 +15,7 @@ _:
   "vlc"
 
   # Browsers
+  "librewolf"
   # "firefox@developer-edition"
   # "google-chrome"
 ]

@@ -82,6 +82,7 @@ in
 
   #lsp
   # rust-analyzer
+  elixir-ls
   typescript-language-server
   nil
   lua-language-server
