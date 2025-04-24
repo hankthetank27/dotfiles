@@ -32,6 +32,13 @@ in
   unrar
   xz
   sops
+  (beets.override {
+    pluginOverrides = {
+      discogs.enable = true;
+      fetchart.enable = true;
+      embedart.enable = true;
+    };
+  })
 
   # db
   sqlite
