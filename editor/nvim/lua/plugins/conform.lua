@@ -18,6 +18,7 @@ return {
 			rust = { "rustfmt" },
 			lua = { "stylua" },
 			nix = { "nixfmt" },
+			elixir = { "mix" },
 			-- javascript = { "prettierd", "prettier", stop_after_first = true },
 		},
 		format_on_save = {
