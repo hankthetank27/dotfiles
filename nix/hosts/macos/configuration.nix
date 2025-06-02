@@ -16,6 +16,8 @@
     shell = pkgs.bashInteractive;
   };
 
+  system.primaryUser = user;
+
   programs.bash.enable = true;
 
   imports = [
