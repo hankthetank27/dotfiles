@@ -47,6 +47,7 @@ in
 
   # devops-ish stuff
   flyctl
+  cloudflared
   google-cloud-sdk
 
   # language toolchains etc
@@ -79,8 +80,6 @@ in
   virtualenv
 
   hugo
-
-  shopify-cli
 
   #nix
   nix-output-monitor # get additional information while building packages
